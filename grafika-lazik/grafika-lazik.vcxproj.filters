@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\ViewEngine">
+      <UniqueIdentifier>{2afc83a3-47b0-4b0d-a37d-d96c7943b411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ViewEngine">
+      <UniqueIdentifier>{5490233b-833f-49c9-a7bb-ef5c791eb3e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Elementarne">
+      <UniqueIdentifier>{556d4ff6-7d6e-4166-96ca-f8ee712761f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Elementarne\KulaG">
+      <UniqueIdentifier>{b64c80a0-16f0-43c1-b5ba-507518490f2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Elementarne\SzescianG">
+      <UniqueIdentifier>{a9a4a2aa-2336-48f2-b63b-3e6681edb159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Elementarne">
+      <UniqueIdentifier>{36f22dfe-030b-413c-8ea8-858c5b5a53cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Elementarne\KulaG">
+      <UniqueIdentifier>{21a0a3d4-9e71-443e-9df7-a232ab0d3b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Elementarne\SzescianG">
+      <UniqueIdentifier>{d1646738-4d2c-4c01-baba-155cd9d9cd79}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="grafika-lazik.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewEngine.h">
+      <Filter>Header Files\ViewEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>Header Files\ViewEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="SzescianG.h">
+      <Filter>Header Files\Elementarne\SzescianG</Filter>
+    </ClInclude>
+    <ClInclude Include="KulaG.h">
+      <Filter>Header Files\Elementarne\KulaG</Filter>
+    </ClInclude>
+    <ClInclude Include="Axes.h">
+      <Filter>Header Files\ViewEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Lazik.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Header Files\ViewEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="grafika-lazik.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KulaG.cpp">
+      <Filter>Source Files\Elementarne\KulaG</Filter>
+    </ClCompile>
+    <ClCompile Include="SzescianG.cpp">
+      <Filter>Source Files\Elementarne\SzescianG</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewEngine.cpp">
+      <Filter>Source Files\ViewEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Axes.cpp">
+      <Filter>Source Files\ViewEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lazik.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="grafika-lazik.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="grafika-lazik.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
