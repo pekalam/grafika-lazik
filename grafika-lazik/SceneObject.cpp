@@ -40,15 +40,18 @@ std::unique_ptr<SceneObject> SceneObject::disjoin(const std::string name)
 	auto r = std::find_if(_children.begin(), _children.end(),
 							[&](std::unique_ptr<SceneObject>& ch)
 							{
-								return ch->name() == name;
+								return ch->getBaseName() == name;
 							});
-	if (r->get()->name() != name)
-		return nullptr;
-	auto ch = r->release();
-	_children.erase(r);
-	ch->_isChild = false;
-	ch->_name = ch->getBaseName();
-	return std::move(std::unique_ptr<SceneObject>(ch));
+	if (r != _children.end() && r->get()->getBaseName() == name)
+	{
+		auto ch = r->release();
+		_children.erase(r);
+		ch->_isChild = false;
+		ch->_name = ch->getBaseName();
+		return std::unique_ptr<SceneObject>(ch);
+	}
+	else
+		throw new std::exception("child not found");
 }
 
 SceneObject* SceneObject::child(const std::string name)
@@ -73,9 +76,9 @@ void SceneObject::render()
 	glRotatef(_rotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(_rotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(_rotation.z, 0.0f, 0.0f, 1.0f);
-	drawObject();
 	for (auto& child : _children)
 		child->render();
+	drawObject();
 	glLoadIdentity();
 	glPopMatrix();
 }

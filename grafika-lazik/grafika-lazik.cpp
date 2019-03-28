@@ -249,12 +249,49 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 {
 	static HGLRC hRC;               // Permenant Rendering context
 	static HDC hDC;                 // Private GDI Device context
+	RECT rcClient;                 // client area rectangle 
+	POINT ptClientUL;              // client upper left corner 
+	POINT ptClientLR;              // client lower right corner 
+	static POINTS ptsBegin;        // beginning point 
+	static POINTS ptsEnd;          // new endpoint 
+	static POINTS ptsPrevEnd;      // previous endpoint 
+	static BOOL fPrevLine = FALSE; // previous line flag 
 
 	ViewEngine& viewEngine = ViewEngine::instance();
 
 	switch (message)
 	{
+	case WM_LBUTTONDOWN:
+		//SetCapture(hWnd);
+		GetClientRect(hWnd, &rcClient);
+		ptClientUL.x = rcClient.left;
+		ptClientUL.y = rcClient.top;
+		ptClientLR.x = rcClient.right + 1;
+		ptClientLR.y = rcClient.bottom + 1;
+		ClientToScreen(hWnd, &ptClientUL);
+		ClientToScreen(hWnd, &ptClientLR);
+		SetRect(&rcClient, ptClientUL.x, ptClientUL.y,
+			ptClientLR.x, ptClientLR.y);
+		ptsBegin = MAKEPOINTS(lParam);
+		break;
 		// Window creation, setup for OpenGL
+	case WM_MOUSEMOVE:
+
+		// When moving the mouse, the user must hold down 
+		// the left mouse button to draw lines. 
+
+		if (wParam & MK_LBUTTON)
+		{
+			POINTS current = MAKEPOINTS(lParam);
+			if (current.x > ptsBegin.x) {
+				viewEngine.cameraRotationY(viewEngine.cameraRotation().y - 1.0);
+			}else if (current.x < ptsBegin.x)
+			{
+				viewEngine.cameraRotationY(viewEngine.cameraRotation().y + 1.0);
+			}
+			InvalidateRect(hWnd, 0, true);
+		}
+		break;
 	case WM_CREATE:
 		// Store the device context
 		hDC = GetDC(hWnd);
@@ -269,8 +306,10 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		hRC = wglCreateContext(hDC);
 		wglMakeCurrent(hDC, hRC);
 
-
-		viewEngine.init();
+		viewEngine.init([hWnd]()
+		{
+			UpdateWindow(hWnd);
+		});
 
 
 

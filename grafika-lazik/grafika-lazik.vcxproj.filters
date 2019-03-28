@@ -43,6 +43,18 @@
     <Filter Include="Source Files\Elementarne\WalecG">
       <UniqueIdentifier>{12b3f159-b8a4-47de-b135-10bb10238cc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Elementarne\PierscienG">
+      <UniqueIdentifier>{d417016c-ceb2-4ba6-9995-0a475c7425b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Elementarne\PierscienG">
+      <UniqueIdentifier>{d918b396-d003-4ff1-adf9-b2160788575e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Elementy">
+      <UniqueIdentifier>{f84e69ad-875e-4bd2-af02-9e48b66ed4df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Elementy">
+      <UniqueIdentifier>{a539d4ab-e4b6-4b52-ae7f-9b792b21be3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -81,6 +93,12 @@
     <ClInclude Include="WalecG.h">
       <Filter>Header Files\Elementarne\WalecG</Filter>
     </ClInclude>
+    <ClInclude Include="PierscienG.h">
+      <Filter>Header Files\Elementarne\PierscienG</Filter>
+    </ClInclude>
+    <ClInclude Include="GlownaKamera.h">
+      <Filter>Header Files\Elementy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -101,14 +119,20 @@
     <ClCompile Include="Axes.cpp">
       <Filter>Source Files\ViewEngine</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Lazik.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WalecG.cpp">
       <Filter>Source Files\Elementarne\WalecG</Filter>
+    </ClCompile>
+    <ClCompile Include="PierscienG.cpp">
+      <Filter>Source Files\Elementarne\PierscienG</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>Source Files\ViewEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GlownaKamera.cpp">
+      <Filter>Source Files\Elementy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

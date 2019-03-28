@@ -14,8 +14,9 @@ ViewEngine::ViewEngine() :
 	
 }
 
-void ViewEngine::init()
+void ViewEngine::init(std::function<void()> onRepaint)
 {
+	_repaint = onRepaint;
 	// Light values and coordinates
 	//GLfloat  ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };
 	//GLfloat  diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
@@ -98,6 +99,12 @@ void ViewEngine::render()
 
 	glPolygonMode(_polygonModeFace, _polygonModeMode);
 
+	while(!_newSceneObjectsQueue.empty())
+	{
+		_sceneObjects.push_back(_newSceneObjectsQueue.back());
+		_newSceneObjectsQueue.pop_back();
+	}
+
 	for(auto obj : _sceneObjects)
 	{
 		if(!obj.get().isChild())
@@ -108,4 +115,7 @@ void ViewEngine::render()
 
 	// Flush drawing commands
 	glFlush();
+
+	if (_newSceneObjectsQueue.size() > 0)
+		_repaint();
 }
