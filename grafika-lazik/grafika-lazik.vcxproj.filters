@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Elementarne\SzescianG">
       <UniqueIdentifier>{d1646738-4d2c-4c01-baba-155cd9d9cd79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Elementarne\WalecG">
+      <UniqueIdentifier>{b1f5e6f2-de1b-4f37-9aeb-204e38389674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Elementarne\WalecG">
+      <UniqueIdentifier>{12b3f159-b8a4-47de-b135-10bb10238cc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -72,6 +78,9 @@
     <ClInclude Include="Vector3.h">
       <Filter>Header Files\ViewEngine</Filter>
     </ClInclude>
+    <ClInclude Include="WalecG.h">
+      <Filter>Header Files\Elementarne\WalecG</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -97,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="Lazik.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WalecG.cpp">
+      <Filter>Source Files\Elementarne\WalecG</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

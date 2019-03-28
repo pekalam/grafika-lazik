@@ -160,6 +160,7 @@
     <ClInclude Include="SzescianG.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ViewEngine.h" />
+    <ClInclude Include="WalecG.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Axes.cpp" />
@@ -175,6 +176,7 @@
     </ClCompile>
     <ClCompile Include="SzescianG.cpp" />
     <ClCompile Include="ViewEngine.cpp" />
+    <ClCompile Include="WalecG.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="grafika-lazik.rc" />

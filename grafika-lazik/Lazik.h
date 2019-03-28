@@ -2,6 +2,7 @@
 #include "SceneObject.h"
 #include "KulaG.h"
 #include "SzescianG.h"
+#include "WalecG.h"
 
 
 class Lazik :
@@ -14,6 +15,7 @@ public:
 	{
 		join(new SzescianG{"sz1", 20, 5, 20});
 		join(new KulaG{ "kula1",5,12,12 , {0,0,0}});
+		join(new WalecG("walec1", 20, 5));
 		this->position({ 0,10,0 });
 	}
 };
