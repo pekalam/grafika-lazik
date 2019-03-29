@@ -5,6 +5,8 @@
 #include "WalecG.h"
 #include "PierscienG.h"
 #include "GlownaKamera.h"
+#include "ScianaG.h"
+#include "TrapezProstG.h"
 
 
 class Lazik :

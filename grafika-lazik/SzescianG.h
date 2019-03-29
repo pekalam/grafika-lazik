@@ -3,11 +3,11 @@
 
 class SzescianG : public SceneObject
 {
-protected:
-	void drawObject() override;
 private:
 	int _sectorsX, _sectorsY, _sectorsZ;
 	GLfloat _dl, _wys, _szer;
+protected:
+	void drawObject() override;
 public:
 	SzescianG(GLfloat dl, GLfloat wys, GLfloat szer,
 		Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, 

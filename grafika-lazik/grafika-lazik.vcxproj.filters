@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Elementy">
       <UniqueIdentifier>{a539d4ab-e4b6-4b52-ae7f-9b792b21be3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Elementy\GlownaKamera">
+      <UniqueIdentifier>{95acef2a-d222-4bbb-9916-f56315bffa4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Elementarne\TrapezProst">
+      <UniqueIdentifier>{cf16e76f-b71e-4a4c-ad96-7a4aaeacf943}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -97,7 +103,13 @@
       <Filter>Header Files\Elementarne\PierscienG</Filter>
     </ClInclude>
     <ClInclude Include="GlownaKamera.h">
-      <Filter>Header Files\Elementy</Filter>
+      <Filter>Header Files\Elementy\GlownaKamera</Filter>
+    </ClInclude>
+    <ClInclude Include="ScianaG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrapezProstG.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +145,12 @@
     </ClCompile>
     <ClCompile Include="GlownaKamera.cpp">
       <Filter>Source Files\Elementy</Filter>
+    </ClCompile>
+    <ClCompile Include="ScianaG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrapezProstG.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
