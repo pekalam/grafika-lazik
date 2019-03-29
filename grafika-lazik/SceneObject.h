@@ -31,7 +31,13 @@ protected:
 	virtual void drawObject() {};
 public:
 	SceneObject(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }) : _position(position), _rotation(rotation) { _create(); };
-	SceneObject(std::string name, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }) : _name(name), _position(position), _rotation(rotation) { _create(); };
+	SceneObject(std::string name, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, std::vector<SceneObject*> children = {}) : _name(name), _position(position), _rotation(rotation)
+	{
+		for (auto it = children.begin(); it != children.end(); ++it)
+			join(*it);
+
+		_create();
+	};
 	virtual ~SceneObject();
 
 	// obrot obiektu / grupy obiektow (w radianach)

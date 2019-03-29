@@ -3,7 +3,7 @@
 #include <cmath>
 
 
-#define GL_PI 3.1415926535897
+#define GL_PI 3.1415926535897f
 
 class Vector3
 {

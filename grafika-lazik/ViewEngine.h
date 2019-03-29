@@ -41,7 +41,8 @@ private:
 			{
 				return ch.get().name() == obj.name();
 			});
-			_newSceneObjectsQueue.erase(it);
+			if(it != _newSceneObjectsQueue.end())
+				_newSceneObjectsQueue.erase(it);
 		}
 	}
 	void rotClamp(GLfloat &v) { if (v > 360.0f) v = v - 360.0f; else if (v < -360.0f) v = v + 360.0f; }
