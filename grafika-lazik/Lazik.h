@@ -6,7 +6,8 @@
 #include "PierscienG.h"
 #include "GlownaKamera.h"
 #include "ScianaG.h"
-#include "TrapezProstG.h"
+#include "TrapezRownoramiennyG.h"
+#include "BrylaGlowna.h"
 
 
 class Lazik :
@@ -18,7 +19,8 @@ public:
 	Lazik(Vector3 position = {0, 0, 0}, Vector3 rotation = {0, 0, 0}) : SceneObject("lazik", position, rotation)
 	{
 		join(new GlownaKamera({6, 8, -7.5}));
-		join(new SzescianG("czglowna", 15, 6, 20, {0,0,0}, {0,0,0}, 1, 1, 1, {0.5, 1.0f, 0.5}));
+		join(new BrylaGlowna());
+		join(new TrapezRownoramiennyG(5, 5, 3, true, true, 3, {0,0,0}, {0,0,0}));
 		this->position({ 0,0,0 });
 	}
 };

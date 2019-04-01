@@ -150,13 +150,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Axes.h" />
+    <ClInclude Include="BrylaGlowna.h" />
     <ClInclude Include="grafika-lazik.h" />
     <ClInclude Include="GlownaKamera.h" />
     <ClInclude Include="KulaG.h" />
     <ClInclude Include="Lazik.h" />
     <ClInclude Include="PierscienG.h" />
     <ClInclude Include="ScianaG.h" />
-    <ClInclude Include="TrapezProstG.h" />
+    <ClInclude Include="TrapezRownoramiennyG.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SceneObject.h" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Axes.cpp" />
+    <ClCompile Include="BrylaGlowna.cpp" />
     <ClCompile Include="grafika-lazik.cpp" />
     <ClCompile Include="GlownaKamera.cpp" />
     <ClCompile Include="KulaG.cpp" />
@@ -182,7 +184,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SzescianG.cpp" />
-    <ClCompile Include="TrapezProstG.cpp" />
+    <ClCompile Include="TrapezRownoramiennyG.cpp" />
     <ClCompile Include="ViewEngine.cpp" />
     <ClCompile Include="WalecG.cpp" />
   </ItemGroup>
