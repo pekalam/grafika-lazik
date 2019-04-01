@@ -17,13 +17,14 @@ ViewEngine::ViewEngine() :
 void ViewEngine::init(std::function<void()> onRepaint)
 {
 	_repaint = onRepaint;
+	_axes = std::make_unique<Axes>();
 	// Light values and coordinates
 	//GLfloat  ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };
 	//GLfloat  diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
 	//GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
 	//GLfloat	 lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };
 	//GLfloat  specref[] =  { 1.0f, 1.0f, 1.0f, 1.0f };
-	_axes = std::make_unique<Axes>();
+	
 
 
 	glEnable(GL_DEPTH_TEST);	// Hidden surface removal
@@ -56,6 +57,33 @@ void ViewEngine::init(std::function<void()> onRepaint)
 	glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
 	// Black brush
 	glColor3f(0.0, 0.0, 0.0);
+}
+
+void ViewEngine::registerObject(SceneObject& obj)
+{
+	_newSceneObjectsQueue.push_back(obj);
+}
+
+void ViewEngine::unregisterObject(SceneObject& obj)
+{
+	auto it = std::find_if(_sceneObjects.begin(), _sceneObjects.end(), [&](std::reference_wrapper<SceneObject>& ch)
+	{
+		return ch.get().name() == obj.name();
+	});
+	if (it != _sceneObjects.end())
+	{
+		_sceneObjects.erase(it);
+	}
+	else if (it == _sceneObjects.end())
+	{
+		it = std::find_if(_newSceneObjectsQueue.begin(), _newSceneObjectsQueue.end(),
+			[&](std::reference_wrapper<SceneObject>& ch)
+		{
+			return ch.get().name() == obj.name();
+		});
+		if (it != _newSceneObjectsQueue.end())
+			_newSceneObjectsQueue.erase(it);
+	}
 }
 
 void ViewEngine::winSizeChanged(int w, int h)

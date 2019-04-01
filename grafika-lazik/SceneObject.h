@@ -17,21 +17,17 @@ private:
 	std::string _name;
 	bool _hide = false;
 	bool _isChild = false;
+	Vector3 _color;
 	std::string getBaseName() const;
 	void _create();
-public:
-	void hide(){_hide = true;}
-	void show() { _hide = false; }
-	bool isVisible() { return !_hide; }
-	bool isChild() const{return _isChild;}
 protected:
 	Vector3 _position;
-protected:
 	Vector3 _rotation;
 	virtual void drawObject() {};
 public:
-	SceneObject(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }) : _position(position), _rotation(rotation) { _create(); };
-	SceneObject(std::string name, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, std::vector<SceneObject*> children = {}) : _name(name), _position(position), _rotation(rotation)
+	SceneObject(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = {0,0,0}) : _position(position), _rotation(rotation), _color(color) { _create(); };
+	SceneObject(std::string name, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, std::vector<SceneObject*> children = {}, Vector3 color = {0,0,0}) 
+		: _name(name), _position(position), _rotation(rotation), _color(color)
 	{
 		for (auto it = children.begin(); it != children.end(); ++it)
 			join(*it);
@@ -55,8 +51,8 @@ public:
 	void translateZ(GLfloat z) { _position.z += z; }
 
 	// dodanie obiektu do grupy obiektow potomnych
-	void join(SceneObject* obj);
-	void join(std::unique_ptr<SceneObject>& obj);
+	SceneObject& join(SceneObject* obj);
+	SceneObject& join(std::unique_ptr<SceneObject>& obj);
 
 	// usuniecie obiektu z grupy obiektow potomnych
 	std::unique_ptr<SceneObject> disjoin(const std::string name);
@@ -86,6 +82,18 @@ public:
 	int childrenCount() const { return _children.size(); }
 	const std::string &name() const { return _name; }
 	void name(const std::string &newName) { _name = newName; }
+	void hide() { _hide = true; }
+	void show() { _hide = false; }
+	bool isVisible() { return !_hide; }
+	bool isChild() const { return _isChild; }
+	Vector3 color() const
+	{
+		return _color;
+	}
+	void color(const Vector3& vector3)
+	{
+		_color = vector3;
+	}
 };
 
 

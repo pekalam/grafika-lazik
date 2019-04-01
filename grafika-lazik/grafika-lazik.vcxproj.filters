@@ -105,11 +105,11 @@
     <ClInclude Include="GlownaKamera.h">
       <Filter>Header Files\Elementy\GlownaKamera</Filter>
     </ClInclude>
-    <ClInclude Include="ScianaG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TrapezProstG.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScianaG.h">
+      <Filter>Header Files\Elementarne</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

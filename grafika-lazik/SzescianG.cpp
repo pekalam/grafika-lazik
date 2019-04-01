@@ -8,7 +8,6 @@ void SzescianG::drawObject()
 	GLfloat stepX = _dl / _sectorsX;
 	GLfloat stepY = _wys / _sectorsY;
 	GLfloat stepZ = _szer / _sectorsZ;
-	glColor3f(0.0, 0.0, 0.0);
 	for (i = 1; i <= _sectorsX; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (j = 1; j <= _sectorsY + 1; j++) {

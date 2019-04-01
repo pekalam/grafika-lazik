@@ -12,10 +12,10 @@ private:
 protected:
 	void drawObject() override;
 public:
-	PierscienG(GLfloat r, GLfloat h, GLfloat szer, int sections, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }) 
-		: SceneObject(position, rotation), _r(r),_h(h), _szer(szer), _sections(sections) {};
-	PierscienG(std::string name, GLfloat r, GLfloat h, GLfloat szer, int sections, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 })
-		: SceneObject(name, position, rotation), _r(r), _h(h), _szer(szer), _sections(sections) {};
+	PierscienG(GLfloat r, GLfloat h, GLfloat szer, int sections, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = {0,0,0}) 
+		: SceneObject(position, rotation, color), _r(r),_h(h), _szer(szer), _sections(sections) {};
+	PierscienG(std::string name, GLfloat r, GLfloat h, GLfloat szer, int sections, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = {0,0,0})
+		: SceneObject(name, position, rotation, {}, color), _r(r), _h(h), _szer(szer), _sections(sections) {};
 public:
 	GLfloat r() const
 	{

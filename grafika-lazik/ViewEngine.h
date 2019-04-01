@@ -21,30 +21,8 @@ private:
 	std::unique_ptr<Axes> _axes;
 	unsigned short _polygonModeFace = GL_FRONT_AND_BACK;
 	unsigned short _polygonModeMode = GL_LINE;
-	void registerObject(SceneObject& obj)
-	{
-		_newSceneObjectsQueue.push_back(obj);
-	}
-	void unregisterObject(SceneObject &obj)
-	{
-		auto it = std::find_if(_sceneObjects.begin(), _sceneObjects.end(), [&](std::reference_wrapper<SceneObject>& ch)
-		{
-			return ch.get().name() == obj.name();
-		});
-		if(it != _sceneObjects.end())
-		{
-			_sceneObjects.erase(it);
-		}
-		else if(it == _sceneObjects.end())
-		{
-			it = std::find_if(_newSceneObjectsQueue.begin(), _newSceneObjectsQueue.end(), [&](std::reference_wrapper<SceneObject>& ch)
-			{
-				return ch.get().name() == obj.name();
-			});
-			if(it != _newSceneObjectsQueue.end())
-				_newSceneObjectsQueue.erase(it);
-		}
-	}
+	void registerObject(SceneObject& obj);
+	void unregisterObject(SceneObject& obj);
 	void rotClamp(GLfloat &v) { if (v > 360.0f) v = v - 360.0f; else if (v < -360.0f) v = v + 360.0f; }
 	void rotClampv(Vector3 &p) { rotClamp(p.x); rotClamp(p.y); rotClamp(p.z); }
 	ViewEngine();

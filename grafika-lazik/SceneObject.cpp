@@ -21,18 +21,20 @@ SceneObject::~SceneObject()
 	ViewEngine::instance().unregisterObject(*this);
 }
 
-void SceneObject::join(SceneObject* obj)
+SceneObject& SceneObject::join(SceneObject* obj)
 {
 	auto ptr = std::unique_ptr<SceneObject>(obj);
 	join(ptr);
 	obj = nullptr;
+	return *ptr;
 }
 
-void SceneObject::join(std::unique_ptr<SceneObject>& obj)
+SceneObject& SceneObject::join(std::unique_ptr<SceneObject>& obj)
 {
 	obj->name(_name + ":" + obj->name());
 	obj->_isChild = true;
 	_children.push_back(std::move(obj));
+	return *_children.back();
 }
 
 std::unique_ptr<SceneObject> SceneObject::disjoin(const std::string name)
@@ -78,6 +80,7 @@ void SceneObject::render()
 	glRotatef(_rotation.z, 0.0f, 0.0f, 1.0f);
 	for (auto& child : _children)
 		child->render();
+	glColor3f(_color.x, _color.y, _color.z);
 	drawObject();
 	glLoadIdentity();
 	glPopMatrix();
