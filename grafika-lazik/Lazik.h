@@ -8,6 +8,7 @@
 #include "ScianaG.h"
 #include "TrapezRownoramiennyG.h"
 #include "BrylaGlowna.h"
+#include "Pojemnik.h"
 
 
 class Lazik :
@@ -20,7 +21,7 @@ public:
 	{
 		join(new GlownaKamera({6, 8, -7.5}));
 		join(new BrylaGlowna());
-		join(new TrapezRownoramiennyG(5, 5, 3, true, true, 3, {0,0,0}, {0,0,0}));
+		join(new Pojemnik({0,3,17}, {-25, 0,0}));
 		this->position({ 0,0,0 });
 	}
 };

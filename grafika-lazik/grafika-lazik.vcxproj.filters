@@ -117,6 +117,9 @@
     <ClInclude Include="TrapezRownoramiennyG.h">
       <Filter>Header Files\Elementarne\TrapezProstG</Filter>
     </ClInclude>
+    <ClInclude Include="Pojemnik.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -160,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="TrapezRownoramiennyG.cpp">
       <Filter>Source Files\Elementarne\TrapezProstG</Filter>
+    </ClCompile>
+    <ClCompile Include="Pojemnik.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

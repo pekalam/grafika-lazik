@@ -9,7 +9,7 @@ ViewEngine* ViewEngine::__singleton = nullptr;
 ViewEngine::ViewEngine() : 
 	_lastWidth(0),
 	_lastHeight(0),
-	_cameraPosition{ 5.0f,-10.0f,-30.0f }
+	_cameraPosition{ 5.0f,-10.0f,-50.0f }
 {
 	
 }
