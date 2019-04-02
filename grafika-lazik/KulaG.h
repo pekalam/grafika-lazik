@@ -36,7 +36,8 @@ public:
 protected:
 	void drawObject() override;
 public:
-	KulaG(std::string name, GLfloat r, int stacks, int sectors, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }) : SceneObject(name, position, rotation), _stacks(stacks), _sectors(sectors), _R(r) {};
-	KulaG(GLfloat r, int stacks, int sectors, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }) : SceneObject(position, rotation), _stacks(stacks), _sectors(sectors), _R(r) {};
+	KulaG(std::string name, GLfloat r, int stacks, int sectors, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = { 0,0,0 }) : SceneObject(name, position, rotation, {}, color), _stacks(stacks), _sectors(sectors), _R(r) {};
+	KulaG(GLfloat r, int stacks, int sectors, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = { 0,0,0 }) 
+		: SceneObject(position, rotation, color), _stacks(stacks), _sectors(sectors), _R(r) {};
 };
 

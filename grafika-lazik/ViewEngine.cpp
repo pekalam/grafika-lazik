@@ -18,12 +18,8 @@ void ViewEngine::init(std::function<void()> onRepaint)
 {
 	_repaint = onRepaint;
 	_axes = std::make_unique<Axes>();
-	// Light values and coordinates
-	//GLfloat  ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };
-	//GLfloat  diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
-	//GLfloat  specular[] = { 1.0f, 1.0f, 1.0f, 1.0f};
-	//GLfloat	 lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };
-	//GLfloat  specref[] =  { 1.0f, 1.0f, 1.0f, 1.0f };
+	_light = std::make_unique<Light>(Vector3{0,10,0});
+
 	
 
 
@@ -31,30 +27,11 @@ void ViewEngine::init(std::function<void()> onRepaint)
 	glFrontFace(GL_CCW);		// Counter clock-wise polygons face out
 	//glEnable(GL_CULL_FACE);		// Do not calculate inside of jet
 
-	// Enable lighting
-	//glEnable(GL_LIGHTING);
-
-	// Setup and enable light 0
-	//glLightfv(GL_LIGHT0,GL_AMBIENT,ambientLight);
-	//glLightfv(GL_LIGHT0,GL_DIFFUSE,diffuseLight);
-	//glLightfv(GL_LIGHT0,GL_SPECULAR,specular);
-	//glLightfv(GL_LIGHT0,GL_POSITION,lightPos);
-	//glEnable(GL_LIGHT0);
-
-	// Enable color tracking
-	//glEnable(GL_COLOR_MATERIAL);
-
-	// Set Material properties to follow glColor values
-	//glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-
-	// All materials hereafter have full specular reflectivity
-	// with a high shine
-	//glMaterialfv(GL_FRONT, GL_SPECULAR,specref);
-	//glMateriali(GL_FRONT,GL_SHININESS,128);
-
+	
+	//gluLookAt()
 
 	// White background
-	glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	// Black brush
 	glColor3f(0.0, 0.0, 0.0);
 }

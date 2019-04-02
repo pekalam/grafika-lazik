@@ -61,7 +61,10 @@
     <Filter Include="Header Files\Elementarne\TrapezProstG">
       <UniqueIdentifier>{cf16e76f-b71e-4a4c-ad96-7a4aaeacf943}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Elementarne\TrapezProstG">
+    <Filter Include="Source Files\Elementarne\ScianaG">
+      <UniqueIdentifier>{6025a6cd-248e-4715-99ec-e6d5f8a00a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Elementarne\TrapezRownoramiennyG">
       <UniqueIdentifier>{4bd9b4ab-2536-4039-8df4-afeb8c212bed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -93,9 +96,6 @@
     <ClInclude Include="Axes.h">
       <Filter>Header Files\ViewEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Lazik.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>Header Files\ViewEngine</Filter>
     </ClInclude>
@@ -118,9 +118,24 @@
       <Filter>Header Files\Elementarne\TrapezProstG</Filter>
     </ClInclude>
     <ClInclude Include="Pojemnik.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Elementy</Filter>
+    </ClInclude>
+    <ClInclude Include="Lazik.h">
+      <Filter>Header Files\Elementy</Filter>
     </ClInclude>
     <ClInclude Include="Rama.h">
+      <Filter>Header Files\Elementy</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files\ViewEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Kolo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Powierzchnia.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scena.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -143,9 +158,6 @@
     <ClCompile Include="Axes.cpp">
       <Filter>Source Files\ViewEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Lazik.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WalecG.cpp">
       <Filter>Source Files\Elementarne\WalecG</Filter>
     </ClCompile>
@@ -155,22 +167,22 @@
     <ClCompile Include="SceneObject.cpp">
       <Filter>Source Files\ViewEngine</Filter>
     </ClCompile>
-    <ClCompile Include="GlownaKamera.cpp">
-      <Filter>Source Files\Elementy</Filter>
+    <ClCompile Include="TrapezRownoramiennyG.cpp">
+      <Filter>Source Files\Elementarne\TrapezRownoramiennyG</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ScianaG.cpp">
+      <Filter>Source Files\Elementarne\ScianaG</Filter>
+    </ClCompile>
+    <ClCompile Include="Kolo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BrylaGlowna.cpp">
-      <Filter>Source Files\Elementy</Filter>
-    </ClCompile>
-    <ClCompile Include="TrapezRownoramiennyG.cpp">
-      <Filter>Source Files\Elementarne\TrapezProstG</Filter>
-    </ClCompile>
-    <ClCompile Include="Pojemnik.cpp">
+    <ClCompile Include="Powierzchnia.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rama.cpp">
+    <ClCompile Include="Scena.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

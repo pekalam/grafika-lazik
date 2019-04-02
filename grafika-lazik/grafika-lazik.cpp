@@ -10,7 +10,8 @@
 #include <gl\glu.h>             // GLU library
 #include "ViewEngine.h"
 #include "KulaG.h"
-#include "Lazik.h"
+
+#include "Scena.h"
 
 
 #define MAX_LOADSTRING 100
@@ -33,7 +34,8 @@ bool shiftPressed;
 GLfloat camPosStep = 2.0f;
 GLfloat camRotStep = 1.0f;
 
-Lazik lazik({ 0,0,0 });
+
+Scena scena;
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,

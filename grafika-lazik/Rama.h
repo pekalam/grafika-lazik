@@ -8,15 +8,10 @@ class Rama : public SceneObject
 protected:
 	void drawObject() override;
 public:
+	GLfloat dlugosc();
 	Rama(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }) : SceneObject("rama", position, rotation)
 	{
-		join(new SceneObject("szyja", { 6,5.5,-7.5 }, { 90,0,0 }, {
-			new WalecG(4,0.5,{},{},1.0),
-			new PierscienG(0.5,0.12,0.5,20.0,{0.0,0.0,-1.75},{},{}),
-			new PierscienG(0.5,0.25,0.5,20.0,{0.0,0.0,-1.25},{},{}),
-			new SzescianG(2.0,0.5,0.5,{0.25,0,-2.25},{0,0,90}),
-			new WalecG(1,0.25,{-0.25,0,-2.25},{90,0,0},1.0)
-			}));
+		
 		join(new SceneObject("podwozie", {}, {}, {
 			new WalecG(1,0.5,{8,-2.0,2.0},{0,90,0},1.0),
 			new WalecG(1,0.5,{-8,-2.0,2.0},{0,90,0},1.0),

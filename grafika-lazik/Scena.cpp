@@ -1,4 +1,4 @@
 #include "stdafx.h"
-#include "Lazik.h"
+#include "Scena.h"
 
 

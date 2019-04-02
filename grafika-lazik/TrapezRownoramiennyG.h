@@ -19,9 +19,9 @@ private:
 protected:
 	void drawObject() override;
 public:
-	TrapezRownoramiennyG(GLfloat h, GLfloat a, GLfloat b, bool pr, bool two, int sectors, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 })
-		: SceneObject(position, rotation), _h(h), _a(a), _b(b), _sectorsX(sectors), _sectorsY(sectors), _pr(pr), _two(two) {};
-	TrapezRownoramiennyG(std::string name, GLfloat h, GLfloat a, GLfloat b, bool pr, bool two, int sectors, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 })
-		: SceneObject(name, position, rotation), _h(h), _a(a), _b(b), _sectorsX(sectors), _sectorsY(sectors), _pr(pr), _two(two) {};
+	TrapezRownoramiennyG(GLfloat h, GLfloat a, GLfloat b, bool pr, bool two, int sectors, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = {0,0,0})
+		: SceneObject(position, rotation, color), _h(h), _a(a), _b(b), _sectorsX(sectors), _sectorsY(sectors), _pr(pr), _two(two) {};
+	TrapezRownoramiennyG(std::string name, GLfloat h, GLfloat a, GLfloat b, bool pr, bool two, int sectors, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = {0,0,0})
+		: SceneObject(name, position, rotation, {}, color), _h(h), _a(a), _b(b), _sectorsX(sectors), _sectorsY(sectors), _pr(pr), _two(two) {};
 };
 

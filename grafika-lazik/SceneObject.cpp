@@ -73,6 +73,8 @@ void SceneObject::render()
 {
 	if (_hide)
 		return;
+	float currentColor[4];
+	glGetFloatv(GL_CURRENT_COLOR, currentColor);
 	glPushMatrix();
 	glTranslatef(_position.x, _position.y, _position.z);
 	glRotatef(_rotation.x, 1.0f, 0.0f, 0.0f);
@@ -84,4 +86,5 @@ void SceneObject::render()
 	drawObject();
 	glLoadIdentity();
 	glPopMatrix();
+	glColor3f(currentColor[0], currentColor[1], currentColor[2]);
 }

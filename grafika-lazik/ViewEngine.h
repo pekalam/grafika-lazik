@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "Axes.h"
 #include <queue>
+#include "Light.h"
 
 
 class ViewEngine
@@ -19,6 +20,7 @@ private:
 	Vector3 _cameraPosition;
 	Vector3 _cameraRotation;
 	std::unique_ptr<Axes> _axes;
+	std::unique_ptr<Light> _light;
 	unsigned short _polygonModeFace = GL_FRONT_AND_BACK;
 	unsigned short _polygonModeMode = GL_LINE;
 	void registerObject(SceneObject& obj);

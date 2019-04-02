@@ -153,11 +153,15 @@
     <ClInclude Include="BrylaGlowna.h" />
     <ClInclude Include="grafika-lazik.h" />
     <ClInclude Include="GlownaKamera.h" />
+    <ClInclude Include="Kolo.h" />
     <ClInclude Include="KulaG.h" />
     <ClInclude Include="Lazik.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="PierscienG.h" />
     <ClInclude Include="Pojemnik.h" />
+    <ClInclude Include="Powierzchnia.h" />
     <ClInclude Include="Rama.h" />
+    <ClInclude Include="Scena.h" />
     <ClInclude Include="ScianaG.h" />
     <ClInclude Include="TrapezRownoramiennyG.h" />
     <ClInclude Include="Vector3.h" />
@@ -171,14 +175,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Axes.cpp" />
-    <ClCompile Include="BrylaGlowna.cpp" />
     <ClCompile Include="grafika-lazik.cpp" />
-    <ClCompile Include="GlownaKamera.cpp" />
+    <ClCompile Include="Kolo.cpp" />
     <ClCompile Include="KulaG.cpp" />
-    <ClCompile Include="Lazik.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="PierscienG.cpp" />
-    <ClCompile Include="Pojemnik.cpp" />
-    <ClCompile Include="Rama.cpp" />
+    <ClCompile Include="Powierzchnia.cpp" />
+    <ClCompile Include="Scena.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="ScianaG.cpp" />
     <ClCompile Include="stdafx.cpp">

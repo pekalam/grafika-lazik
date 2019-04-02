@@ -5,7 +5,7 @@
 #include <functional>
 
 
-#define RAD(deg) deg*GL_PI/180.0f;
+#define RAD(deg) deg*GL_PI/180.0f
 
 class ViewEngine;
 
