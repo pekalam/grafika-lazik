@@ -157,6 +157,7 @@
     <ClInclude Include="Lazik.h" />
     <ClInclude Include="PierscienG.h" />
     <ClInclude Include="Pojemnik.h" />
+    <ClInclude Include="Rama.h" />
     <ClInclude Include="ScianaG.h" />
     <ClInclude Include="TrapezRownoramiennyG.h" />
     <ClInclude Include="Vector3.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="Lazik.cpp" />
     <ClCompile Include="PierscienG.cpp" />
     <ClCompile Include="Pojemnik.cpp" />
+    <ClCompile Include="Rama.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="ScianaG.cpp" />
     <ClCompile Include="stdafx.cpp">

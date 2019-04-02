@@ -9,6 +9,7 @@
 #include "TrapezRownoramiennyG.h"
 #include "BrylaGlowna.h"
 #include "Pojemnik.h"
+#include "Rama.h"
 
 
 class Lazik :
@@ -22,6 +23,7 @@ public:
 		join(new GlownaKamera({6, 8, -7.5}));
 		join(new BrylaGlowna());
 		join(new Pojemnik({0,3,17}, {-25, 0,0}));
+		join(new Rama());
 		this->position({ 0,0,0 });
 	}
 };

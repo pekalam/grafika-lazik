@@ -120,6 +120,9 @@
     <ClInclude Include="Pojemnik.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Rama.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -165,6 +168,9 @@
       <Filter>Source Files\Elementarne\TrapezProstG</Filter>
     </ClCompile>
     <ClCompile Include="Pojemnik.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rama.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
