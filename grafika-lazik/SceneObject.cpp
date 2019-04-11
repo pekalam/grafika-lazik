@@ -24,9 +24,9 @@ SceneObject::~SceneObject()
 SceneObject& SceneObject::join(SceneObject* obj)
 {
 	auto ptr = std::unique_ptr<SceneObject>(obj);
-	join(ptr);
+	SceneObject& scObj = join(ptr);
 	obj = nullptr;
-	return *ptr;
+	return scObj;
 }
 
 SceneObject& SceneObject::join(std::unique_ptr<SceneObject>& obj)
@@ -34,7 +34,8 @@ SceneObject& SceneObject::join(std::unique_ptr<SceneObject>& obj)
 	obj->name(_name + ":" + obj->name());
 	obj->_isChild = true;
 	_children.push_back(std::move(obj));
-	return *_children.back();
+	SceneObject* ptr = _children.back().get();
+	return *ptr;
 }
 
 std::unique_ptr<SceneObject> SceneObject::disjoin(const std::string name)

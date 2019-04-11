@@ -176,9 +176,6 @@
     <ClCompile Include="ScianaG.cpp">
       <Filter>Source Files\Elementarne\ScianaG</Filter>
     </ClCompile>
-    <ClCompile Include="Kolo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Powierzchnia.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

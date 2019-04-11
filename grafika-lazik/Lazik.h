@@ -23,7 +23,9 @@ public:
 		join(new GlownaKamera({6, 13.75, -7.5}));
 		join(new BrylaGlowna());
 		join(new Pojemnik({0,3,17}, {-25, 0,0}));
-		join(new Rama());
+		SceneObject& rama = join(new Rama());
+		rama.positionY(-1.5f);
+		positionY(.75+((Rama&)rama).wysokosc());
 	}
 };
 

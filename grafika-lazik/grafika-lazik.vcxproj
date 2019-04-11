@@ -176,7 +176,6 @@
   <ItemGroup>
     <ClCompile Include="Axes.cpp" />
     <ClCompile Include="grafika-lazik.cpp" />
-    <ClCompile Include="Kolo.cpp" />
     <ClCompile Include="KulaG.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="PierscienG.cpp" />

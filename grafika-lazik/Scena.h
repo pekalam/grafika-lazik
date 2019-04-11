@@ -19,7 +19,7 @@ public:
 inline Scena::Scena()
 {
 	join(new Powierzchnia());
-	join(new Lazik({0, 6.5, 0}));
+	join(new Lazik({0, 0, 0}));
 }
 
 

@@ -31,7 +31,7 @@ inline Powierzchnia::Powierzchnia()
 	for (int i = 0; i < 100; i++) {
 		GLfloat x = rnd(generator);
 		GLfloat z = rnd(generator);
-		join(new KulaG(1, 3, 3, {x ,0.5, z}, { 0,0,0 }, { 0.63f, 0.4726f, 0.2851f }));
+	//	join(new KulaG(1, 3, 3, {x ,0.5, z}, { 0,0,0 }, { 0.63f, 0.4726f, 0.2851f }));
 	}
 }
 
