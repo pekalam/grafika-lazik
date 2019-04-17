@@ -24,27 +24,27 @@ public:
 		GLfloat osPos = pos - os2Wys;
 		
 		
-		join(new WalecG(1,0.75,{8, pos,2.0},{0,90,0},1.0));
-		join(new WalecG(1,0.75,{-8, pos,2.0},{0,90,0},1.0));
-		join(new WalecG(2,0.75,{9.5, pos,10.0},{0,90,0},1.0));
-		join(new WalecG(2,0.75,{-9.5, pos,10.0},{0,90,0},1.0));
-		join(new WalecG(8.5,0.5,{8.5, pos,6.0},{0,5.5,0},1.0));
-		join(new WalecG(8.5,0.5,{-8.5,pos,6.0},{0,-5.5,0},1.0));
-		join(new WalecG(6,0.5,{10,pos2,7.0},{-27.5,0,0},1.0));
-		join(new WalecG(6,0.5,{-10,pos2,7.0},{-27.5,0,0},1.0));
-		join(new WalecG(12,0.5,{10,pos2,16},{13.0,0,0},1.0));
-		join(new WalecG(12,0.5,{-10,pos2,16},{13.0,0,0},1.0));
-		join(new WalecG(1,0.6,{10,osPos,4.5},{0,90,0},1.0)); 
-		join(new WalecG(1,0.6,{-10,osPos,4.5},{0,90,0},1.0)); 
-		join(new WalecG(1,0.6,{10,osPos,21.75},{0,90,0},1.0));
-		join(new WalecG(1,0.6,{-10,osPos,21.75},{0,90,0},1.0)); 
-		join(new WalecG(1,0.6,{-9.85,osPos,-13.75},{0,90,0},1.0));
-		join(new WalecG(1,0.6,{9.85,osPos,-13.75},{0,90,0},1.0)); 
+		join(new WalecG(1,0.75,{8, pos,2.0},{0,90,0}));
+		join(new WalecG(1,0.75,{-8, pos,2.0},{0,90,0}));
+		join(new WalecG(2,0.75,{9.5, pos,10.0},{0,90,0}));
+		join(new WalecG(2,0.75,{-9.5, pos,10.0},{0,90,0}));
+		join(new WalecG(8.5,0.5,{8.5, pos,6.0},{0,5.5,0}));
+		join(new WalecG(8.5,0.5,{-8.5,pos,6.0},{0,-5.5,0}));
+		join(new WalecG(6,0.5,{10,pos2,7.0},{-27.5,0,0}));
+		join(new WalecG(6,0.5,{-10,pos2,7.0},{-27.5,0,0}));
+		join(new WalecG(12,0.5,{10,pos2,16},{13.0,0,0}));
+		join(new WalecG(12,0.5,{-10,pos2,16},{13.0,0,0}));
+		join(new WalecG(1,0.6,{10,osPos,4.5},{0,90,0})); 
+		join(new WalecG(1,0.6,{-10,osPos,4.5},{0,90,0})); 
+		join(new WalecG(1, 0.6, { 10,osPos,21.75 }, { 0,90,0 }));
+		join(new WalecG(1,0.6,{-10,osPos,21.75},{0,90,0})); 
+		join(new WalecG(1,0.6,{-9.85,osPos,-13.75},{0,90,0}));
+		join(new WalecG(1,0.6,{9.85,osPos,-13.75},{0,90,0})); 
 
-		join(new WalecG(16.0,0.5,{9,pos,-6},{0,-6,0},1.0));
-		join(new WalecG(16.0,0.5,{-9,pos,-6},{0,6,0},1.0));
-		join(new WalecG(2.0,0.6,{9.75,pos,-13.75},{90,0,0},1.0));
-		join(new WalecG(2.0,0.6,{-9.75,pos,-13.75},{90,0,0},1.0));
+		join(new WalecG(16.0,0.5,{9,pos,-6},{0,-6,0}));
+		join(new WalecG(16.0,0.5,{-9,pos,-6},{0,6,0}));
+		join(new WalecG(2.0,0.6,{9.75,pos,-13.75},{90,0,0}));
+		join(new WalecG(2.0,0.6,{-9.75,pos,-13.75},{90,0,0}));
 		join(new SzescianG(1.4,0.5,1,{9.65,pos2-.25f,-13.75},{0,0,90}));
 		join(new SzescianG(1.4,0.5,1,{-9.65,pos2 - .25f,-13.75},{0,0,90}));
 		join(new SzescianG(2,0.5,1,{10.75,pos2+.25f,-13.75},{0,0,0}));
