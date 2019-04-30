@@ -156,7 +156,6 @@
     <ClInclude Include="Kolo.h" />
     <ClInclude Include="KulaG.h" />
     <ClInclude Include="Lazik.h" />
-    <ClInclude Include="Light.h" />
     <ClInclude Include="PierscienG.h" />
     <ClInclude Include="Pojemnik.h" />
     <ClInclude Include="Powierzchnia.h" />
@@ -177,7 +176,6 @@
     <ClCompile Include="Axes.cpp" />
     <ClCompile Include="grafika-lazik.cpp" />
     <ClCompile Include="KulaG.cpp" />
-    <ClCompile Include="Light.cpp" />
     <ClCompile Include="PierscienG.cpp" />
     <ClCompile Include="Powierzchnia.cpp" />
     <ClCompile Include="Scena.cpp" />

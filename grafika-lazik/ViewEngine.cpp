@@ -3,13 +3,17 @@
 #include <gl/gl.h>
 #include <gl\glu.h>
 #include "SceneObject.h"
+#include "glm/gtx/rotate_vector.hpp"
+
 
 ViewEngine* ViewEngine::__singleton = nullptr;
 
 ViewEngine::ViewEngine() : 
 	_lastWidth(0),
 	_lastHeight(0),
-	_cameraPosition{ 5.0f,-10.0f,-50.0f }
+	_cameraPositionDelta{ 0,0,0 },
+	_initalCameraPosition{ 0.0f,15.0f,50.0f },
+	_cameraLookDir{0,0,0}
 {
 	
 }
@@ -18,10 +22,6 @@ void ViewEngine::init(std::function<void()> onRepaint)
 {
 	_repaint = onRepaint;
 	_axes = std::make_unique<Axes>();
-	_light = std::make_unique<Light>(Vector3{0,10,0});
-
-	
-
 
 	glEnable(GL_DEPTH_TEST);	// Hidden surface removal
 	glFrontFace(GL_CCW);		// Counter clock-wise polygons face out
@@ -34,6 +34,46 @@ void ViewEngine::init(std::function<void()> onRepaint)
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	// Black brush
 	glColor3f(0.0, 0.0, 0.0);
+}
+
+void ViewEngine::initLight()
+{
+	GLfloat qaAmbientLight[] = { 0.2, 0.2, 0.2, 1.0 };
+	GLfloat qaDiffuseLight[] = { 0.8, 0.8, 0.8, 1.0 };
+	GLfloat qaSpecularLight[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat emitLight[] = { 0.9, 0.9, 0.9, 0.01 };
+	GLfloat qaBlack[] = { 0.0, 0.0, 0.0, 1.0 }; //Black Color
+	GLfloat qaGreen[] = { 0.0, 1.0, 0.0, 1.0 }; //Green Color
+	GLfloat qaWhite[] = { 1.0, 1.0, 1.0, 1.0 }; //White Color
+	GLfloat qaRed[] = { 1.0, 0.0, 0.0, 1.0 }; //White Color
+
+	// Enable lighting
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+
+	// Set lighting intensity and color
+	glLightfv(GL_LIGHT0, GL_AMBIENT, qaAmbientLight);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, qaDiffuseLight);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, qaSpecularLight);
+
+	// Set the light position
+	glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
+		{
+			_initalCameraPosition.x,
+			_initalCameraPosition.y,
+			_initalCameraPosition.z,
+			1
+		});
+
+	glEnable(GL_COLOR_MATERIAL);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, qaGreen);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, qaGreen);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, qaWhite);
+
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 20);
 }
 
 void ViewEngine::registerObject(SceneObject& obj)
@@ -83,7 +123,11 @@ void ViewEngine::winSizeChanged(int w, int h)
 
 	gluPerspective(60.0f, fAspect, 1.0, 400);
 
-	
+	gluLookAt(_initalCameraPosition.x, _initalCameraPosition.y, _initalCameraPosition.z, 
+		_cameraLookDir.x, _cameraLookDir.y, _cameraLookDir.z,
+		0, 1, 0);
+
+	initLight();
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -94,12 +138,35 @@ void ViewEngine::render()
 	// Clear the window with current clearing color
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Save the matrix state and do the rotations
-	glPushMatrix();
-	glTranslatef(_cameraPosition.x, _cameraPosition.y, _cameraPosition.z);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	_initalCameraPosition.x += _cameraPositionDelta.x;
+	_initalCameraPosition.y += _cameraPositionDelta.y;
+	_initalCameraPosition.z += _cameraPositionDelta.z;
+	_cameraLookDir.x += _cameraPositionDelta.x;
+	_cameraLookDir.y += _cameraPositionDelta.y;
+	_cameraLookDir.z += _cameraPositionDelta.z;
+	
+
+	gluLookAt(_initalCameraPosition.x, _initalCameraPosition.y, _initalCameraPosition.z,
+		_cameraLookDir.x, _cameraLookDir.y, _cameraLookDir.z,
+		0, 1, 0);
+
+	_cameraPositionDelta.zero();
+	
+	
 	rotClampv(_cameraRotation);
 	glRotatef(_cameraRotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(_cameraRotation.y, 0.0f, 1.0f, 0.0f);
+
+	glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
+		{
+			0,
+			0,
+			0,
+			1
+		});
 
 
 	glPolygonMode(_polygonModeFace, _polygonModeMode);
@@ -115,8 +182,6 @@ void ViewEngine::render()
 		if(!obj.get().isChild())
 			obj.get().render();
 	}
-
-	glPopMatrix();
 
 	// Flush drawing commands
 	glFlush();

@@ -5,8 +5,9 @@
 #include <algorithm>
 #include "Axes.h"
 #include <queue>
-#include "Light.h"
-
+#include "glm/glm.hpp"
+#include "glm/ext.hpp"
+#include "glm/vec3.hpp"
 
 class ViewEngine
 {
@@ -17,12 +18,15 @@ private:
 	std::vector<std::reference_wrapper<SceneObject>> _sceneObjects;
 	std::vector<std::reference_wrapper<SceneObject>> _newSceneObjectsQueue;
 	int _lastWidth, _lastHeight;
-	Vector3 _cameraPosition;
+	Vector3 _cameraPositionDelta;
 	Vector3 _cameraRotation;
+	glm::vec3 _initalCameraPosition;
+	glm::vec3 _cameraLookDir;
 	std::unique_ptr<Axes> _axes;
-	std::unique_ptr<Light> _light;
 	unsigned short _polygonModeFace = GL_FRONT_AND_BACK;
 	unsigned short _polygonModeMode = GL_LINE;
+
+	void initLight();
 	void registerObject(SceneObject& obj);
 	void unregisterObject(SceneObject& obj);
 	void rotClamp(GLfloat &v) { if (v > 360.0f) v = v - 360.0f; else if (v < -360.0f) v = v + 360.0f; }
@@ -66,12 +70,12 @@ public:
 
 	Vector3 cameraPosition() const
 	{
-		return _cameraPosition;
+		return _cameraPositionDelta;
 	}
 
 	void cameraPosition(const Vector3& point)
 	{
-		_cameraPosition = point;
+		_cameraPositionDelta = point;
 	}
 
 	Vector3 cameraRotation() const
@@ -84,15 +88,21 @@ public:
 		_cameraRotation = point;
 	}
 
-	void cameraPositionX(GLfloat x) { _cameraPosition.x = x; }
-	void cameraPositionY(GLfloat y) { _cameraPosition.y = y; }
-	void cameraPositionZ(GLfloat z) { _cameraPosition.z = z; }
+	void moveCameraX(GLfloat x)
+	{
+		_cameraPositionDelta.x = x;
+	}
+	void moveCameraY(GLfloat y) { _cameraPositionDelta.y = y; }
+	void moveCameraZ(GLfloat z) { _cameraPositionDelta.z = z; }
 																			
-	void cameraRotationX(GLfloat x) { _cameraRotation.x = x; }
+	void cameraRotationX(GLfloat x)
+	{
+		_cameraRotation.x = x;
+	}
 	void cameraRotationY(GLfloat y) { _cameraRotation.y = y; }
 	void cameraRotationZ(GLfloat z) { _cameraRotation.z = z; }
 
-	
+
 	ViewEngine(const ViewEngine&) = delete;
 	ViewEngine(ViewEngine&&) = delete;
 	void operator=(ViewEngine &) = delete;

@@ -404,22 +404,22 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		if (!ctrlPressed) {
 			if (wParam == VK_UP)
 				viewEngine.cameraRotationX(
-					viewEngine.cameraRotation().x - camRotStep
+					viewEngine.cameraRotation().x-camRotStep
 				);
 
 			if (wParam == VK_DOWN)
 				viewEngine.cameraRotationX(
-					viewEngine.cameraRotation().x + camRotStep
+					viewEngine.cameraRotation().x+camRotStep
 				);
 
 			if (wParam == VK_LEFT)
 				viewEngine.cameraRotationY(
-					viewEngine.cameraRotation().y - camRotStep
+					viewEngine.cameraRotation().y-camRotStep
 				);
 
 			if (wParam == VK_RIGHT)
 				viewEngine.cameraRotationY(
-					viewEngine.cameraRotation().y + camRotStep
+					viewEngine.cameraRotation().y+camRotStep
 				);
 
 			//xRot = (const int)xRot % 360;
@@ -429,36 +429,36 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		{
 			if (ctrlPressed && !shiftPressed) {
 				if (wParam == VK_UP)
-					viewEngine.cameraPositionY(
-						viewEngine.cameraPosition().y - camPosStep
+					viewEngine.moveCameraY(
+						-camPosStep
 					);
 
 				if (wParam == VK_DOWN)
-					viewEngine.cameraPositionY(
-						viewEngine.cameraPosition().y + camPosStep
+					viewEngine.moveCameraY(
+						camPosStep
 					);
 			}
 			if (ctrlPressed && shiftPressed)
 			{
 				if (wParam == VK_UP)
-					viewEngine.cameraPositionZ(
-						viewEngine.cameraPosition().z + camPosStep
+					viewEngine.moveCameraZ(
+						-camPosStep
 					);
 
 				if (wParam == VK_DOWN)
-					viewEngine.cameraPositionZ(
-						viewEngine.cameraPosition().z - camPosStep
+					viewEngine.moveCameraZ(
+						camPosStep
 					);
 			}
 
 			if (wParam == VK_LEFT)
-				viewEngine.cameraPositionX(
-					viewEngine.cameraPosition().x + camPosStep
+				viewEngine.moveCameraX(
+					-camPosStep
 				);
 
 			if (wParam == VK_RIGHT)
-				viewEngine.cameraPositionX(
-					viewEngine.cameraPosition().x - camPosStep
+				viewEngine.moveCameraX(
+					camPosStep
 				);
 		}
 

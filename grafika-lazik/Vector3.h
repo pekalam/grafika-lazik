@@ -34,6 +34,10 @@ public:
 		return mid;
 	}
 
+	void zero()
+	{
+		x = y = z = 0;
+	}
 };
 
 
