@@ -104,12 +104,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Marek\Desktop\grafika-lazik\grafika-lazik\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,8 +153,10 @@
   <ItemGroup>
     <ClInclude Include="Axes.h" />
     <ClInclude Include="BrylaGlowna.h" />
+    <ClInclude Include="FastNoise.h" />
     <ClInclude Include="grafika-lazik.h" />
     <ClInclude Include="GlownaKamera.h" />
+    <ClInclude Include="Icosphere42.h" />
     <ClInclude Include="Kolo.h" />
     <ClInclude Include="KulaG.h" />
     <ClInclude Include="Lazik.h" />
@@ -174,7 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Axes.cpp" />
+    <ClCompile Include="FastNoise.cpp" />
     <ClCompile Include="grafika-lazik.cpp" />
+    <ClCompile Include="Icosphere42.cpp" />
     <ClCompile Include="KulaG.cpp" />
     <ClCompile Include="PierscienG.cpp" />
     <ClCompile Include="Powierzchnia.cpp" />

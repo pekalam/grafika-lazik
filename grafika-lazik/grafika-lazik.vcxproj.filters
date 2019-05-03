@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Elementarne\TrapezRownoramiennyG">
       <UniqueIdentifier>{4bd9b4ab-2536-4039-8df4-afeb8c212bed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Elementarne\Icosphere42">
+      <UniqueIdentifier>{78463f77-7a4c-45b4-8fd7-dd0309ffa97f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Elementarne\Icosphere42">
+      <UniqueIdentifier>{9dd32a54-13f0-4178-b003-5675fc19e05b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -135,6 +141,12 @@
     <ClInclude Include="Scena.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FastNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Icosphere42.h">
+      <Filter>Header Files\Elementarne\Icosphere42</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -175,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="Scena.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FastNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Icosphere42.cpp">
+      <Filter>Source Files\Elementarne\Icosphere42</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

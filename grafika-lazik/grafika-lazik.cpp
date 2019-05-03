@@ -31,7 +31,7 @@ HPALETTE hPalette = NULL;
 
 bool ctrlPressed;
 bool shiftPressed;
-GLfloat camPosStep = 2.0f;
+GLfloat camPosStep = 0.25f;
 GLfloat camRotStep = 1.0f;
 
 
