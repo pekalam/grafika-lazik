@@ -12,7 +12,7 @@ ViewEngine::ViewEngine() :
 	_lastWidth(0),
 	_lastHeight(0),
 	_cameraPositionDelta{ 0,0,0 },
-	_initalCameraPosition{ 0.0f,15.0f,50.0f },
+	_initalCameraPosition{ 0.0f,1.0f,9.0f },
 	_cameraLookDir{0,0,0}
 {
 	
@@ -85,7 +85,7 @@ void ViewEngine::unregisterObject(SceneObject& obj)
 {
 	auto it = std::find_if(_sceneObjects.begin(), _sceneObjects.end(), [&](std::reference_wrapper<SceneObject>& ch)
 	{
-		return ch.get().name() == obj.name();
+		return &ch.get() == &obj;
 	});
 	if (it != _sceneObjects.end())
 	{
@@ -96,7 +96,7 @@ void ViewEngine::unregisterObject(SceneObject& obj)
 		it = std::find_if(_newSceneObjectsQueue.begin(), _newSceneObjectsQueue.end(),
 			[&](std::reference_wrapper<SceneObject>& ch)
 		{
-			return ch.get().name() == obj.name();
+			return &ch.get() == &obj;
 		});
 		if (it != _newSceneObjectsQueue.end())
 			_newSceneObjectsQueue.erase(it);
