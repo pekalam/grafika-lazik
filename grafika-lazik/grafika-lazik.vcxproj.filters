@@ -147,6 +147,9 @@
     <ClInclude Include="Icosphere42.h">
       <Filter>Header Files\Elementarne\Icosphere42</Filter>
     </ClInclude>
+    <ClInclude Include="Kamien.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -193,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="Icosphere42.cpp">
       <Filter>Source Files\Elementarne\Icosphere42</Filter>
+    </ClCompile>
+    <ClCompile Include="Kamien.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

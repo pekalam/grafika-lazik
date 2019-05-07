@@ -157,6 +157,7 @@
     <ClInclude Include="grafika-lazik.h" />
     <ClInclude Include="GlownaKamera.h" />
     <ClInclude Include="Icosphere42.h" />
+    <ClInclude Include="Kamien.h" />
     <ClInclude Include="Kolo.h" />
     <ClInclude Include="KulaG.h" />
     <ClInclude Include="Lazik.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="FastNoise.cpp" />
     <ClCompile Include="grafika-lazik.cpp" />
     <ClCompile Include="Icosphere42.cpp" />
+    <ClCompile Include="Kamien.cpp" />
     <ClCompile Include="KulaG.cpp" />
     <ClCompile Include="PierscienG.cpp" />
     <ClCompile Include="Powierzchnia.cpp" />
