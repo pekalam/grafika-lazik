@@ -14,20 +14,10 @@ protected:
 	}
 
 public:
-	Scena();
+	Scena(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,125,0 }, Vector3 color = { 0,1,0 });
 
 };
 
-inline Scena::Scena()
-{
-	join(new Powierzchnia());
-	join(new Lazik({0, 0, 0}));
-	std::random_device rd;
-	std::mt19937 e2(rd());
-	std::uniform_real_distribution<> distX(-15, 15);
-	std::uniform_real_distribution<> distY(-15, 15);
-	for(int i = 0; i < 1000; i++)
-		join(new Kamien(1, {(float)distX(e2), 0, -(float)distY(e2)}));
-}
+
 
 

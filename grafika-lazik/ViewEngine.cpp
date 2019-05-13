@@ -12,7 +12,7 @@ ViewEngine::ViewEngine() :
 	_lastWidth(0),
 	_lastHeight(0),
 	_cameraPositionDelta{ 0,0,0 },
-	_initalCameraPosition{ 0.0f,1.0f,9.0f },
+	_initalCameraPosition{ 0.0f,6.0f,35.0f },
 	_cameraLookDir{0,0,0}
 {
 	
@@ -57,11 +57,12 @@ void ViewEngine::initLight()
 	glLightfv(GL_LIGHT0, GL_SPECULAR, qaSpecularLight);
 
 	// Set the light position
+
 	glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
 		{
-			_initalCameraPosition.x,
-			_initalCameraPosition.y,
-			_initalCameraPosition.z,
+			100,
+			20,
+			-_initalCameraPosition.z - 100,
 			1
 		});
 
@@ -162,9 +163,9 @@ void ViewEngine::render()
 
 	glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
 		{
-			0,
-			0,
-			0,
+			100,
+			20,
+			-_initalCameraPosition.z - 100,
 			1
 		});
 

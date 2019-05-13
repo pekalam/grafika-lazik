@@ -22,9 +22,9 @@ Kamien::Kamien(GLfloat r, Vector3 position, Vector3 rotation, Vector3 color) : I
 
 	float maxY = *std::max_element(verticesY, verticesY + 80);
 	float minY = *std::min_element(verticesY, verticesY + 80);
-	if(minY < 0)
+	if(minY * r < 0)
 	{
-		_position.y += std::abs(minY)/2;
+		_position.y += -minY/2 * r;
 	}
 }
 

@@ -32,7 +32,7 @@ HPALETTE hPalette = NULL;
 bool ctrlPressed;
 bool shiftPressed;
 GLfloat camPosStep = 0.25f;
-GLfloat camRotStep = 1.0f;
+GLfloat camRotStep = 1;
 
 
 Scena scena;
