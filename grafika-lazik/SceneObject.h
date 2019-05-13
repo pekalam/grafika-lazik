@@ -17,12 +17,13 @@ private:
 	std::string _name;
 	bool _hide = false;
 	bool _isChild = false;
-	Vector3 _color;
+	
 	std::string getBaseName() const;
 	void _create();
 protected:
 	Vector3 _position;
 	Vector3 _rotation;
+	Vector3 _color;
 	virtual void drawObject() {};
 public:
 	SceneObject(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = {0,0,0}) : _position(position), _rotation(rotation), _color(color) { _create(); };

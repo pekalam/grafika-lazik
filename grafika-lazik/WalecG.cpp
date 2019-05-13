@@ -44,3 +44,8 @@ void WalecG::drawObject()
 	glEnd();
 
 }
+
+void WalecG::color(Vector3 color)
+{
+	_color = color;
+}

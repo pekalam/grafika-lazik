@@ -122,7 +122,7 @@ void ViewEngine::winSizeChanged(int w, int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(60.0f, fAspect, 1.0, 400);
+	gluPerspective(60.0f, fAspect, 1.0, 800);
 
 	gluLookAt(_initalCameraPosition.x, _initalCameraPosition.y, _initalCameraPosition.z, 
 		_cameraLookDir.x, _cameraLookDir.y, _cameraLookDir.z,

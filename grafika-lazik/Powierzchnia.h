@@ -21,7 +21,7 @@ public:
 
 inline Powierzchnia::Powierzchnia()
 {
-	join(new ScianaG(500, 500, 500, 500, {}, {}, {1,1,1}));
+	join(new ScianaG(500, 500, 50, 50, {}, {}, {1,1,1}));
 }
 
 
