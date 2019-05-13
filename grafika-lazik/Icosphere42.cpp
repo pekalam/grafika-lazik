@@ -255,7 +255,14 @@ int Icosphere42::indicesZ[80] = {
 Icosphere42::Icosphere42(GLfloat r, Vector3 position, Vector3 rotation, Vector3 color) : 
 	SceneObject(position, rotation, color), r(r)
 {
-	_initVertices();
+}
+
+Icosphere42::Icosphere42(const Icosphere42& cp)
+{
+	std::memcpy(this->verticesX, cp.verticesX, 42*sizeof(GLfloat));
+	std::memcpy(this->verticesY, cp.verticesY, 42 * sizeof(GLfloat));
+	std::memcpy(this->verticesZ, cp.verticesZ, 42 * sizeof(GLfloat));
+	this->r = cp.r;
 }
 
 void Icosphere42::drawObject()
@@ -280,9 +287,4 @@ void Icosphere42::drawObject()
 		);
 	}
 	glEnd();
-}
-
-void Icosphere42::_initVertices()
-{
-
 }

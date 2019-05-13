@@ -28,6 +28,11 @@ Kamien::Kamien(GLfloat r, Vector3 position, Vector3 rotation, Vector3 color) : I
 	}
 }
 
+Kamien::Kamien(const Kamien& cp) : Icosphere42(cp)
+{
+	this->_color = cp._color;
+}
+
 Kamien::~Kamien()
 {
 }
