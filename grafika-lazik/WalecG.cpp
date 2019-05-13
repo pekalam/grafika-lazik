@@ -10,7 +10,7 @@ void WalecG::drawObject()
 
 	glBegin(GL_TRIANGLE_FAN);
 		glVertex3f(0, 0, _wys / 2.0f);
-		for(int i = 1; i <= _sections; i++)
+		for(int i = 1; i <= _sections + 1; i++)
 		{
 			GLfloat x = _r * cos(angle);
 			GLfloat y = _r * sin(angle);
@@ -34,7 +34,7 @@ void WalecG::drawObject()
 	angle = 0.0f;
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex3f(0, 0, -_wys / 2.0f);
-	for (int i = 1; i <= _sections; i++)
+	for (int i = 1; i <= _sections + 1; i++)
 	{
 		GLfloat x = _r * cos(angle);
 		GLfloat y = _r * sin(angle);
@@ -43,4 +43,9 @@ void WalecG::drawObject()
 	}
 	glEnd();
 
+}
+
+void WalecG::color(Vector3 color)
+{
+	_color = color;
 }
