@@ -8,6 +8,7 @@ class Icosphere42 : public SceneObject
 {
 public:
 	Icosphere42(GLfloat r = 1, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = { 0,1,0 });
+	Icosphere42(const Icosphere42 &cp);
 protected:
 	void drawObject() override;
 public:
@@ -19,10 +20,15 @@ public:
 	GLfloat verticesZ[42] = {
 	0,0,0,0,0.850650808352040,0.850650808352040,-0.850650808352040,-0.850650808352040,-0.525731112119134,0.525731112119134,-0.525731112119134,0.525731112119134,0.309016994374947,0.809016994374948,0.500000000000000,0.500000000000000,0,-0.500000000000000,-0.500000000000000,-0.809016994374948,-0.309016994374947,0,0.809016994374948,0.309016994374947,0.809016994374948,1,-0.309016994374947,0.309016994374947,-1,-0.809016994374948,-0.309016994374947,-0.809016994374948,0.309016994374947,0.809016994374948,0.500000000000000,0.500000000000000,0,-0.500000000000000,-0.500000000000000,-0.809016994374948,-0.309016994374947,0,
 	};
+	void setGradient(Vector3 color[3])
+	{
+		std::memcpy(this->gradient, color, sizeof(Vector3) * 3);
+		this->hasGradient = true;
+	}
 private:
-	inline void _initVertices();
 	GLfloat r;
-
+	Vector3 gradient[3];
+	bool hasGradient = false;
 	static int indicesX[80];
 	static int indicesY[80];
 	static int indicesZ[80];

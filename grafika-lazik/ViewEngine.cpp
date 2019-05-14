@@ -12,7 +12,7 @@ ViewEngine::ViewEngine() :
 	_lastWidth(0),
 	_lastHeight(0),
 	_cameraPositionDelta{ 0,0,0 },
-	_initalCameraPosition{ 0.0f,6.0f,35.0f },
+	_initalCameraPosition{ 0.0f,7.0f,65.0f },
 	_cameraLookDir{0,0,0}
 {
 	
@@ -122,7 +122,7 @@ void ViewEngine::winSizeChanged(int w, int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(60.0f, fAspect, 1.0, 400);
+	gluPerspective(60.0f, fAspect, 1.0, 800);
 
 	gluLookAt(_initalCameraPosition.x, _initalCameraPosition.y, _initalCameraPosition.z, 
 		_cameraLookDir.x, _cameraLookDir.y, _cameraLookDir.z,

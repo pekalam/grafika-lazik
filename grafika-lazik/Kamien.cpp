@@ -10,7 +10,7 @@ Kamien::Kamien(GLfloat r, Vector3 position, Vector3 rotation, Vector3 color) : I
 	std::uniform_real_distribution<> dist(1234, 2000000);
 	noise.SetNoiseType(FastNoise::Perlin);
 	noise.SetSeed(dist(e2));
-	noise.SetFrequency(0.009);
+	noise.SetFrequency(0.010);
 	for(int x = 0; x < 42; x++)
 	{
 		auto nval = noise.GetNoise(1, x);
@@ -26,6 +26,17 @@ Kamien::Kamien(GLfloat r, Vector3 position, Vector3 rotation, Vector3 color) : I
 	{
 		_position.y += -minY/2 * r;
 	}
+	Vector3 gradient[3] = {
+		{0.3906, 0.2734, 0.136},
+		{0.2656, 0.2109, 0.144},
+		{0.199,0.140,0.07}
+		};
+	setGradient(gradient);
+}
+
+Kamien::Kamien(const Kamien& cp) : Icosphere42(cp)
+{
+	this->_color = cp._color;
 }
 
 Kamien::~Kamien()
