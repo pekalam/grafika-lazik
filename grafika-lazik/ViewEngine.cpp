@@ -12,7 +12,7 @@ ViewEngine::ViewEngine() :
 	_lastWidth(0),
 	_lastHeight(0),
 	_cameraPositionDelta{ 0,0,0 },
-	_initalCameraPosition{ 0.0f,7.0f,65.0f },
+	_initalCameraPosition{ 0.0f,7.0f,53.0f },
 	_cameraLookDir{0,0,0}
 {
 	
@@ -58,11 +58,18 @@ void ViewEngine::initLight()
 
 	// Set the light position
 
-	glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
+	/*glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
 		{
 			100,
 			20,
 			-_initalCameraPosition.z - 100,
+			1
+		});*/
+	glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
+		{
+			0,
+			0,
+			0,
 			1
 		});
 
