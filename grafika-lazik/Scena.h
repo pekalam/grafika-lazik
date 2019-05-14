@@ -14,7 +14,7 @@ protected:
 	}
 
 public:
-	Scena(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,125,0 }, Vector3 color = { 0,1,0 });
+	Scena(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,170,0 }, Vector3 color = { 0,1,0 });
 
 };
 

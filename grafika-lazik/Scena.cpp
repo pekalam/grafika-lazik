@@ -12,7 +12,7 @@ Scena::Scena(Vector3 position, Vector3 rotation, Vector3 color) : SceneObject(po
 	float rg = 100;
 	std::uniform_real_distribution<> distX(-rg, rg);
 	std::uniform_real_distribution<> distY(-rg, rg);
-	std::uniform_real_distribution<> distR(1, 1);
+	std::uniform_real_distribution<> distR(1, 3);
 	std::uniform_int_distribution<> distPatt(0, 99);
 	Kamien* patt[100];
 	for(int i = 0; i < 100; i++)
@@ -27,5 +27,5 @@ Scena::Scena(Vector3 position, Vector3 rotation, Vector3 color) : SceneObject(po
 		rock->positionZ(-(float)distY(e2));
 		join(rock);
 	}
-	join(new Stacja({50, 0, 150}, {0,180, 0}));
+	join(new Stacja({80, 0, 150}, {0,190, 0}));
 }
