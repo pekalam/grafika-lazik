@@ -263,6 +263,9 @@ Icosphere42::Icosphere42(const Icosphere42& cp)
 	std::memcpy(this->verticesY, cp.verticesY, 42 * sizeof(GLfloat));
 	std::memcpy(this->verticesZ, cp.verticesZ, 42 * sizeof(GLfloat));
 	this->r = cp.r;
+	this->_position = cp._position;
+	std::memcpy(this->gradient, cp.gradient, sizeof(Vector3) * 3);
+	this->hasGradient = cp.hasGradient;
 }
 
 void Icosphere42::drawObject()
@@ -270,16 +273,22 @@ void Icosphere42::drawObject()
 	glBegin(GL_TRIANGLES);
 	for(int i = 0; i < 80; i++)
 	{
+		if (hasGradient)
+			glColor3f(gradient[0].x, gradient[0].y, gradient[0].z);
 		glVertex3f(
 			_position.x + verticesX[(indicesX[i]-1)]*r,
 			_position.y + verticesY[(indicesX[i]-1)]*r,
 			_position.z + verticesZ[(indicesX[i]-1)]*r
 			);
+		if (hasGradient)
+			glColor3f(gradient[1].x, gradient[1].y, gradient[1].z);
 		glVertex3f(
 			_position.x + verticesX[(indicesY[i] - 1)] * r,
 			_position.y + verticesY[(indicesY[i] - 1)]*r,
 			_position.z + verticesZ[(indicesY[i] -1)]*r
 		);
+		if (hasGradient)
+			glColor3f(gradient[2].x, gradient[2].y, gradient[2].z);
 		glVertex3f(
 			_position.x + verticesX[(indicesZ[i] - 1)]*r,
 			_position.y + verticesY[(indicesZ[i] - 1)]*r,
