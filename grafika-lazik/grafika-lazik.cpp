@@ -402,15 +402,18 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	case WM_KEYDOWN:
 	{
 		if (!ctrlPressed) {
+			auto& lazik = viewEngine.getByName("lazik:kamera");
 			if (wParam == VK_UP)
-				viewEngine.cameraRotationX(
+				lazik.positionZ(lazik.position().z + camPosStep);
+				/*viewEngine.cameraRotationX(
 					viewEngine.cameraRotation().x-camRotStep
-				);
+				);*/
 
 			if (wParam == VK_DOWN)
-				viewEngine.cameraRotationX(
+				lazik.positionY(lazik.position().y + camPosStep);
+				/*viewEngine.cameraRotationX(
 					viewEngine.cameraRotation().x+camRotStep
-				);
+				);*/
 
 			if (wParam == VK_LEFT)
 				viewEngine.cameraRotationY(

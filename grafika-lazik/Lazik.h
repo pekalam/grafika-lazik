@@ -20,7 +20,8 @@ protected:
 public:
 	Lazik(Vector3 position = {0, 0, 0}, Vector3 rotation = {0, 0, 0}) : SceneObject("lazik", position, rotation)
 	{
-		join(new GlownaKamera({6, 13.75, -7.5}));
+		auto kam = new GlownaKamera({ 6, 13.75, -7.5 });
+		join(kam);
 		join(new BrylaGlowna());
 		join(new Pojemnik({0,3,17}, {-25, 0,0}));
 		SceneObject& rama = join(new Rama());
