@@ -1,13 +1,11 @@
 #pragma once
 
-#include <vector>
-#include <functional>
-#include <algorithm>
+
 #include "Axes.h"
-#include <queue>
 #include "glm/glm.hpp"
 #include "glm/ext.hpp"
-#include "glm/vec3.hpp"
+#include "PhysicsEngine.h"
+#include "ViewEngine_defs.h"
 
 class ViewEngine
 {
@@ -15,8 +13,8 @@ class ViewEngine
 private:
 	static ViewEngine* __singleton;
 	std::function<void()> _repaint;
-	std::vector<std::reference_wrapper<SceneObject>> _sceneObjects;
-	std::vector<std::reference_wrapper<SceneObject>> _newSceneObjectsQueue;
+	SceneObjectList _sceneObjects;
+	SceneObjectList _newSceneObjectsQueue;
 	int _lastWidth, _lastHeight;
 	Vector3 _cameraPositionDelta;
 	Vector3 _cameraRotation;
@@ -25,6 +23,8 @@ private:
 	std::unique_ptr<Axes> _axes;
 	unsigned short _polygonModeFace = GL_FRONT_AND_BACK;
 	unsigned short _polygonModeMode = GL_LINE;
+
+	PhysicsEngine _physicsEngine;
 
 	void initLight();
 	void registerObject(SceneObject& obj);
@@ -39,11 +39,17 @@ public:
 			__singleton = new ViewEngine();
 		return *__singleton;
 	}
+	static ViewEngine* _instance_ptr()
+	{
+		return __singleton;
+	}
+	/** Zwraca SceneObject na podstawie nazwy. Par. name w formie: [rodzic]:[name] */
 	SceneObject& getByName(std::string name)
 	{
 		return std::find_if(_sceneObjects.begin(), _sceneObjects.end(), 
 							[&](auto& ch){ return ch.get().name() == name; })->get();
 	}
+	std::shared_ptr<SceneObjectList> getNonStaticSceneObjects();
 
 	bool isDisplayingAxes() const
 	{
@@ -111,5 +117,7 @@ public:
 	void init(std::function<void()> onRepaint);
 	void winSizeChanged(int w, int h);
 	void render();
+	void update(float dt);
+	void frame();
 };
 

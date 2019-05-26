@@ -3,7 +3,6 @@
 #include <gl/gl.h>
 #include <gl\glu.h>
 #include "SceneObject.h"
-#include "glm/gtx/rotate_vector.hpp"
 
 
 ViewEngine* ViewEngine::__singleton = nullptr;
@@ -13,7 +12,8 @@ ViewEngine::ViewEngine() :
 	_lastHeight(0),
 	_cameraPositionDelta{ 0,0,0 },
 	_initalCameraPosition{ 0.0f,7.0f,53.0f },
-	_cameraLookDir{0,0,0}
+	_cameraLookDir{0,0,0},
+	_physicsEngine(*this)
 {
 	
 }
@@ -91,7 +91,7 @@ void ViewEngine::registerObject(SceneObject& obj)
 
 void ViewEngine::unregisterObject(SceneObject& obj)
 {
-	auto it = std::find_if(_sceneObjects.begin(), _sceneObjects.end(), [&](std::reference_wrapper<SceneObject>& ch)
+	auto it = std::find_if(_sceneObjects.begin(), _sceneObjects.end(), [&](SceneObjectList_item& ch)
 	{
 		return &ch.get() == &obj;
 	});
@@ -102,13 +102,30 @@ void ViewEngine::unregisterObject(SceneObject& obj)
 	else if (it == _sceneObjects.end())
 	{
 		it = std::find_if(_newSceneObjectsQueue.begin(), _newSceneObjectsQueue.end(),
-			[&](std::reference_wrapper<SceneObject>& ch)
+			[&](SceneObjectList_item& ch)
 		{
 			return &ch.get() == &obj;
 		});
 		if (it != _newSceneObjectsQueue.end())
 			_newSceneObjectsQueue.erase(it);
 	}
+}
+
+std::shared_ptr<SceneObjectList> ViewEngine::getNonStaticSceneObjects()
+{
+	auto nonStatic = std::make_shared<SceneObjectList>();
+
+	for (auto object : _sceneObjects)
+	{
+		if (object.get().hasPhysics())
+		{
+			nonStatic->push_back(object);
+		}
+	}
+
+	if (nonStatic->size() == 0)
+		return nullptr;
+	return nonStatic;
 }
 
 void ViewEngine::winSizeChanged(int w, int h)
@@ -196,4 +213,13 @@ void ViewEngine::render()
 
 	if (_newSceneObjectsQueue.size() > 0)
 		_repaint();
+}
+
+void ViewEngine::update(float dt)
+{
+	_physicsEngine.update(dt);
+}
+
+void ViewEngine::frame()
+{
 }

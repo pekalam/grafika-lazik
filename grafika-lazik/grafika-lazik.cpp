@@ -12,6 +12,11 @@
 #include "KulaG.h"
 
 #include "Scena.h"
+#include "ScenaTestFiz.h"
+
+// [SILNIK FIZYKI]
+#define PH_UPD_TIME 13
+
 
 
 #define MAX_LOADSTRING 100
@@ -35,7 +40,9 @@ GLfloat camPosStep = 3.25f;
 GLfloat camRotStep = 1;
 
 
-Scena scena;
+//TODO: SCENA
+//Scena scena;
+ScenaTestFiz scena;
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -308,12 +315,17 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		hRC = wglCreateContext(hDC);
 		wglMakeCurrent(hDC, hRC);
 
+		// [VIEW ENGINE]
 		viewEngine.init([hWnd]()
 		{
 			UpdateWindow(hWnd);
 		});
 
+		// [TIMER] Timer dla klatek
+		SetTimer(hWnd,100, 16, (TIMERPROC)NULL);
 
+		// [TIMER] Timer dla silnika fizyki
+		SetTimer(hWnd, 101, PH_UPD_TIME, (TIMERPROC)NULL);
 
 		break;
 
@@ -327,12 +339,27 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		if (hPalette != NULL)
 			DeleteObject(hPalette);
 
+		KillTimer(hWnd, 100);
+		KillTimer(hWnd, 101);
 		// Tell the application to terminate after the window
 		// is gone.
 		PostQuitMessage(0);
 		break;
 
 		// Window is resized.
+	case WM_TIMER:
+		switch (wParam)
+		{
+		case 100:
+			viewEngine.frame();
+			InvalidateRect(hWnd, NULL, FALSE);
+			break;
+		case 101:
+			viewEngine.update(PH_UPD_TIME / 1000.0f);
+			InvalidateRect(hWnd, NULL, FALSE);
+			break;
+		}
+		break;
 	case WM_SIZE:
 		// Call our function which modifies the clipping
 		// volume and viewport
@@ -399,26 +426,56 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		break;
 
 		// Key press, check for arrow keys to do cube rotation.
+	case WM_CHAR:
+		{
+		if (wParam == 'w') {
+			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");
+
+			lazik.driveForward(0.9);
+		}
+		if (wParam == 's') {
+			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");
+
+			lazik.stop();
+		}
+		if(wParam == 'a')
+		{
+			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");
+
+			lazik.rotateLeft();
+		}
+		if (wParam == 'd')
+		{
+			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");
+
+			lazik.rotateRight();
+		}
+		}
+		break;
 	case WM_KEYDOWN:
 	{
 		if (!ctrlPressed) {
-			auto& lazik = viewEngine.getByName("lazik:kamera");
+			//auto& kula = viewEngine.getByName("scenafiz:por");
+			
 			if (wParam == VK_UP)
-				lazik.positionZ(lazik.position().z + camPosStep);
-				/*viewEngine.cameraRotationX(
+				//lazik.positionZ(lazik.position().z + camPosStep);
+				viewEngine.cameraRotationX(
 					viewEngine.cameraRotation().x-camRotStep
-				);*/
+				);
 
 			if (wParam == VK_DOWN)
-				lazik.positionY(lazik.position().y + camPosStep);
-				/*viewEngine.cameraRotationX(
+				//lazik.positionY(lazik.position().y + camPosStep);
+				viewEngine.cameraRotationX(
 					viewEngine.cameraRotation().x+camRotStep
-				);*/
-
-			if (wParam == VK_LEFT)
-				viewEngine.cameraRotationY(
-					viewEngine.cameraRotation().y-camRotStep
 				);
+
+			if (wParam == VK_LEFT) {
+				viewEngine.cameraRotationY(
+					viewEngine.cameraRotation().y - camRotStep
+				);
+				
+				//kula.getPhysics().setInitialVelocityX(0.4);
+			}
 
 			if (wParam == VK_RIGHT)
 				viewEngine.cameraRotationY(

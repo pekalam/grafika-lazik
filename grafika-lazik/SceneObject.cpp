@@ -2,6 +2,9 @@
 #include "SceneObject.h"
 #include "ViewEngine.h"
 #include <sstream>
+#include "BoundingBox.h"
+
+Vector3 SceneObject::currentColor{ 0,0,0 };
 
 std::string SceneObject::getBaseName() const
 {
@@ -25,12 +28,17 @@ SceneObject& SceneObject::join(SceneObject* obj)
 {
 	auto ptr = std::unique_ptr<SceneObject>(obj);
 	SceneObject& scObj = join(ptr);
-	obj = nullptr;
 	return scObj;
 }
 
 SceneObject& SceneObject::join(std::unique_ptr<SceneObject>& obj)
 {
+	for(auto& child : _children)
+	{
+		if (child.get() == obj.get())
+			throw new std::exception("Already child of object");
+	}
+
 	obj->name(_name + ":" + obj->name());
 	obj->_isChild = true;
 	_children.push_back(std::move(obj));
@@ -74,9 +82,10 @@ void SceneObject::render()
 {
 	if (_hide)
 		return;
-	float currentColor[4];
-	glGetFloatv(GL_CURRENT_COLOR, currentColor);
 	glPushMatrix();
+	glRotatef(_coordRotation.x, 1.0f, 0.0f, 0.0f);
+	glRotatef(_coordRotation.y, 0.0f, 1.0f, 0.0f);
+	glRotatef(_coordRotation.z, 0.0f, 0.0f, 1.0f);
 	glTranslatef(_position.x, _position.y, _position.z);
 	glRotatef(_rotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(_rotation.y, 0.0f, 1.0f, 0.0f);
@@ -87,5 +96,17 @@ void SceneObject::render()
 	drawObject();
 	glLoadIdentity();
 	glPopMatrix();
-	glColor3f(currentColor[0], currentColor[1], currentColor[2]);
+}
+
+void SceneObject::setBoundingBox(int lengthx, int heighty, int widthz)
+{
+	auto boundingBox = new BoundingBox();
+	boundingBox->setSizes(lengthx, heighty, widthz);
+	_boundingBox = boundingBox;
+	join(boundingBox);
+}
+
+BoundingBox* SceneObject::getBoundingBox()
+{
+	return _boundingBox;
 }

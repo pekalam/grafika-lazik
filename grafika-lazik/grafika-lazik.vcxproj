@@ -152,8 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Axes.h" />
+    <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="BrylaGlowna.h" />
     <ClInclude Include="FastNoise.h" />
+    <ClInclude Include="Force.h" />
     <ClInclude Include="grafika-lazik.h" />
     <ClInclude Include="GlownaKamera.h" />
     <ClInclude Include="Icosphere42.h" />
@@ -161,11 +163,15 @@
     <ClInclude Include="Kolo.h" />
     <ClInclude Include="KulaG.h" />
     <ClInclude Include="Lazik.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="PhysicsConfig.h" />
+    <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PierscienG.h" />
     <ClInclude Include="Pojemnik.h" />
     <ClInclude Include="Powierzchnia.h" />
     <ClInclude Include="Rama.h" />
     <ClInclude Include="Scena.h" />
+    <ClInclude Include="ScenaTestFiz.h" />
     <ClInclude Include="ScianaG.h" />
     <ClInclude Include="Stacja.h" />
     <ClInclude Include="TrapezRownoramiennyG.h" />
@@ -176,18 +182,28 @@
     <ClInclude Include="SzescianG.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ViewEngine.h" />
+    <ClInclude Include="ViewEngine_defs.h" />
     <ClInclude Include="WalecG.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Axes.cpp" />
+    <ClCompile Include="BoundingBox.cpp" />
+    <ClCompile Include="BrylaGlowna.cpp" />
     <ClCompile Include="FastNoise.cpp" />
+    <ClCompile Include="Force.cpp" />
+    <ClCompile Include="GlownaKamera.cpp" />
     <ClCompile Include="grafika-lazik.cpp" />
     <ClCompile Include="Icosphere42.cpp" />
     <ClCompile Include="Kamien.cpp" />
     <ClCompile Include="KulaG.cpp" />
+    <ClCompile Include="Lazik.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="PhysicsConfig.cpp" />
+    <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PierscienG.cpp" />
+    <ClCompile Include="Pojemnik.cpp" />
     <ClCompile Include="Powierzchnia.cpp" />
-    <ClCompile Include="Scena.cpp" />
+    <ClCompile Include="Rama.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="ScianaG.cpp" />
     <ClCompile Include="Stacja.cpp" />

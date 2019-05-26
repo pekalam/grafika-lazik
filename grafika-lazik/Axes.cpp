@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Axes.h"
-#include <string>
 
 
 Axes::Axes(GLfloat dlOsi, GLfloat dlPodzialki, GLfloat krok) : SceneObject("osie"), _dlugoscPodzialki(dlPodzialki), _dlugoscOsi(dlOsi), _krok(krok)
