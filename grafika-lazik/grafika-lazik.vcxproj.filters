@@ -162,14 +162,8 @@
     <ClInclude Include="PhysicsEngine.h">
       <Filter>Header Files\PhysicsEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Force.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsConfig.h">
       <Filter>Header Files\PhysicsEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="BoundingBox.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scena.h">
       <Filter>Header Files\Sceny</Filter>
@@ -179,6 +173,15 @@
     </ClInclude>
     <ClInclude Include="ViewEngine_defs.h">
       <Filter>Header Files\ViewEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Header Files\PhysicsEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AppGui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenaTestowa.h">
+      <Filter>Header Files\Sceny</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,9 +239,6 @@
     <ClCompile Include="PhysicsEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Force.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -259,6 +259,15 @@
     </ClCompile>
     <ClCompile Include="Rama.cpp">
       <Filter>Source Files\Elementy</Filter>
+    </ClCompile>
+    <ClCompile Include="AppGui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenaTestowa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

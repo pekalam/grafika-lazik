@@ -23,7 +23,7 @@ inline ScenaTestFiz::ScenaTestFiz() : SceneObject("scenafiz")
 
 	join(new Lazik({ 0, 20, 0 }));
 
-	auto ziemia = new ScianaG(500, 500, 25, 25);
+	auto ziemia = new ScianaG(500, 500, 25, 25, {}, {}, {1,1,1});
 	ziemia->getPhysics().setDynamicFrictionCoefficient(0.9);
 	ziemia->setBoundingBox(500, 4, 500);
 	ziemia->setHasPhysics(true);

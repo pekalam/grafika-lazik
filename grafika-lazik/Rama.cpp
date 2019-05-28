@@ -11,6 +11,7 @@ GLfloat Rama::wysokosc()
 
 Rama::Rama(Vector3 position, Vector3 rotation) : SceneObject("rama", position, rotation)
 {
+	
 	GLfloat pos = 0.0f;
 	GLfloat pos2 = pos - osWys;
 	GLfloat osPos = pos - os2Wys;
@@ -48,4 +49,9 @@ Rama::Rama(Vector3 position, Vector3 rotation) : SceneObject("rama", position, r
 	join(new Kolo("kolo-tyl-l", { -11.5, osPos, 21.75 }, { 0, 90, 0 })); // kolo tylnie
 	join(new Kolo("kolo-przednie-r", { 10.85, osPos, -13.75 }, { 0, -90, 0 })); // kolo przednie
 	join(new Kolo("kolo-przednie-l", { -10.85, osPos, -13.75 }, { 0, 90, 0 })); // kolo przednie
+
+	for(auto& ch : _children)
+	{
+		ch.get()->color({ 0,1,1 });
+	}
 }

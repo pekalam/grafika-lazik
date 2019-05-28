@@ -46,8 +46,15 @@ public:
 	/** Zwraca SceneObject na podstawie nazwy. Par. name w formie: [rodzic]:[name] */
 	SceneObject& getByName(std::string name)
 	{
-		return std::find_if(_sceneObjects.begin(), _sceneObjects.end(), 
-							[&](auto& ch){ return ch.get().name() == name; })->get();
+		auto obj = std::find_if(_sceneObjects.begin(), _sceneObjects.end(), 
+							[&](auto& ch){ return ch.get().name() == name; });
+		if (obj == _sceneObjects.end())
+			throw new std::exception("Nie znaleziono");
+		return obj->get();
+	}
+	void removeObject(std::string name)
+	{
+		unregisterObject(getByName(name));
 	}
 	std::shared_ptr<SceneObjectList> getNonStaticSceneObjects();
 

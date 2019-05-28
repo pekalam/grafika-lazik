@@ -8,11 +8,18 @@
 #include "grafika-lazik.h"
 #include <gl\gl.h>              // OpenGL
 #include <gl\glu.h>             // GLU library
+
+#include "AntTweakBar.h"
+
 #include "ViewEngine.h"
 #include "KulaG.h"
 
 #include "Scena.h"
 #include "ScenaTestFiz.h"
+#include "ScenaTestowa.h"
+#include "AppGui.h"
+#include <iostream>
+
 
 // [SILNIK FIZYKI]
 #define PH_UPD_TIME 13
@@ -34,6 +41,7 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 HPALETTE hPalette = NULL;
 
+TwBar *myBar;
 bool ctrlPressed;
 bool shiftPressed;
 GLfloat camPosStep = 3.25f;
@@ -42,7 +50,8 @@ GLfloat camRotStep = 1;
 
 //TODO: SCENA
 //Scena scena;
-ScenaTestFiz scena;
+SceneObject* scene;
+int s = -1;
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -251,6 +260,27 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
+void TW_CALL Scene1(void *clientData)
+{
+	s++;
+	s = s % 2;
+	if (scene != nullptr) {
+		ViewEngine::instance().removeObject(scene->name());
+		delete scene;
+	}
+	switch (s)
+	{
+	case 0:
+		scene = new ScenaTestowa();
+		break;
+	case 1:
+		scene = new ScenaTestowa();
+		break;
+	}
+	
+
+}
+
 LRESULT CALLBACK WndProc(HWND    hWnd,
 	UINT    message,
 	WPARAM  wParam,
@@ -267,7 +297,9 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	static BOOL fPrevLine = FALSE; // previous line flag 
 
 	ViewEngine& viewEngine = ViewEngine::instance();
-
+	
+	if (TwEventWin(hWnd, message, wParam, lParam)) // send event message to AntTweakBar
+		return 0L;
 	switch (message)
 	{
 	case WM_LBUTTONDOWN:
@@ -288,7 +320,7 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 
 		// When moving the mouse, the user must hold down 
 		// the left mouse button to draw lines. 
-
+		
 		if (wParam & MK_LBUTTON)
 		{
 			POINTS current = MAKEPOINTS(lParam);
@@ -315,18 +347,22 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		hRC = wglCreateContext(hDC);
 		wglMakeCurrent(hDC, hRC);
 
+		
+		
+		TwInit(TW_OPENGL, NULL);
+		AppGui::instance().initMainBar();
 		// [VIEW ENGINE]
 		viewEngine.init([hWnd]()
 		{
 			UpdateWindow(hWnd);
 		});
-
+		scene = new ScenaTestowa();
+		AppGui::instance().addButtonMainBar("Scena1", Scene1, &viewEngine, " label='Scene1' key=c help='Random changes of lights parameters.' ");
 		// [TIMER] Timer dla klatek
-		SetTimer(hWnd,100, 16, (TIMERPROC)NULL);
+		SetTimer(hWnd, 100, 16, (TIMERPROC)NULL);
 
 		// [TIMER] Timer dla silnika fizyki
 		SetTimer(hWnd, 101, PH_UPD_TIME, (TIMERPROC)NULL);
-
 		break;
 
 		// Window is being destroyed, cleanup
@@ -343,6 +379,7 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		KillTimer(hWnd, 101);
 		// Tell the application to terminate after the window
 		// is gone.
+		TwTerminate();
 		PostQuitMessage(0);
 		break;
 
@@ -374,10 +411,14 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		// Call OpenGL drawing code
 		viewEngine.render();
 
+		TwDraw();
+
 		SwapBuffers(hDC);
 
 		// Validate the newly painted client area
 		ValidateRect(hWnd, NULL);
+		
+		
 	}
 	break;
 
@@ -432,6 +473,7 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");
 
 			lazik.driveForward(0.9);
+			
 		}
 		if (wParam == 's') {
 			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");

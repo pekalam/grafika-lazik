@@ -27,7 +27,7 @@ void ViewEngine::init(std::function<void()> onRepaint)
 	glFrontFace(GL_CCW);		// Counter clock-wise polygons face out
 	//glEnable(GL_CULL_FACE);		// Do not calculate inside of jet
 
-	
+	initLight();
 	//gluLookAt()
 
 	// White background
@@ -41,13 +41,13 @@ void ViewEngine::initLight()
 	GLfloat qaAmbientLight[] = { 0.2, 0.2, 0.2, 1.0 };
 	GLfloat qaDiffuseLight[] = { 0.8, 0.8, 0.8, 1.0 };
 	GLfloat qaSpecularLight[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat emitLight[] = { 0.9, 0.9, 0.9, 0.01 };
-	GLfloat qaBlack[] = { 0.0, 0.0, 0.0, 1.0 }; //Black Color
+
 	GLfloat qaGreen[] = { 0.0, 1.0, 0.0, 1.0 }; //Green Color
 	GLfloat qaWhite[] = { 1.0, 1.0, 1.0, 1.0 }; //White Color
 	GLfloat qaRed[] = { 1.0, 0.0, 0.0, 1.0 }; //White Color
 
 	// Enable lighting
+	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 
@@ -56,7 +56,14 @@ void ViewEngine::initLight()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, qaDiffuseLight);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, qaSpecularLight);
 
-	// Set the light position
+	glEnable(GL_COLOR_MATERIAL);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, qaGreen);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, qaGreen);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, qaWhite);
+
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 7.0f);
 
 	/*glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
 		{
@@ -68,20 +75,10 @@ void ViewEngine::initLight()
 	glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
 		{
 			0,
-			0,
-			0,
+			10,
+			150,
 			1
 		});
-
-	glEnable(GL_COLOR_MATERIAL);
-
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, qaGreen);
-
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, qaGreen);
-
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, qaWhite);
-
-	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 20);
 }
 
 void ViewEngine::registerObject(SceneObject& obj)
@@ -152,7 +149,7 @@ void ViewEngine::winSizeChanged(int w, int h)
 		_cameraLookDir.x, _cameraLookDir.y, _cameraLookDir.z,
 		0, 1, 0);
 
-	initLight();
+	
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -185,13 +182,13 @@ void ViewEngine::render()
 	glRotatef(_cameraRotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(_cameraRotation.y, 0.0f, 1.0f, 0.0f);
 
-	glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
+	/*glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
 		{
-			100,
-			20,
-			-_initalCameraPosition.z - 100,
+			0,
+			0,
+			_initalCameraPosition.z,
 			1
-		});
+		});*/
 
 
 	glPolygonMode(_polygonModeFace, _polygonModeMode);
@@ -208,6 +205,13 @@ void ViewEngine::render()
 			obj.get().render();
 	}
 
+	glLightfv(GL_LIGHT0, GL_POSITION, new GLfloat[4]
+		{
+			0,
+			100,
+			150,
+			1
+		});
 	// Flush drawing commands
 	glFlush();
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "ViewEngine_defs.h"
-#include <memory>
 
 class ViewEngine;
 

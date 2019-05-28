@@ -14,7 +14,7 @@ BrylaGlowna(Vector3 position, Vector3 rotation, std::vector<SceneObject*> childr
 	join(new SceneObject("bryla-glowna-cz2", {0, 0, 10}, {0, 0, 0}, {
 		new ScianaG("bryla-glowna-cz2-1", 15, 3, 15, 3, {0, 3, 1.5}),
 		new TrapezRownoramiennyG("bryla-glowna-cz2-2", 3, 6, 4, true, false, 4, {7.5, 1, 1.5}, {0, 180, 90}, {1, 1, 0}),
-		new TrapezRownoramiennyG("bryla-glowna-cz2-3", 3, 6, 4, true, false, 4, {-7.5, 1, 1.5}, {0, 180, 90},
+		new TrapezRownoramiennyG("bryla-glowna-cz2-3", 3, 6, 4, true, false, 4, {-7.5, 1, 1.5}, {180, 180, -90},
 		                         {1, 1, 0}),
 		new ScianaG("bryla-glowna-cz2-4", 15, std::sqrt(3 * 3 + 2 * 2), 15, 3, {0, -2, 1.5}, {-33.691, 0, 0},
 		            {0, 0, 0}),

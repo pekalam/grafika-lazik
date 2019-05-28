@@ -13,6 +13,7 @@ Vector3 KulaG::fKula2(GLfloat sec, GLfloat sta, GLfloat r)
 
 void KulaG::drawObject()
 {
+	prx_beginFigure();
 	GLfloat sectorStep = 2 * GL_PI / _sectors;
 	GLfloat stackStep = GL_PI / _stacks;
 
@@ -30,15 +31,23 @@ void KulaG::drawObject()
 			Vector3 p2 = fKula2(a21, a12, _R);
 			Vector3 p3 = fKula2(a11, a22, _R);
 			Vector3 p4 = fKula2(a21, a22, _R);
-			glBegin(GL_TRIANGLE_STRIP);
-			glVertex3f(p1.x, p1.y, p1.z);
-			glVertex3f(p2.x, p2.y, p2.z);
-			glVertex3f(p3.x, p3.y, p3.z);
-			glVertex3f(p4.x, p4.y, p4.z);
-			glEnd();
+			prx_glBegin(GL_TRIANGLE_STRIP);
+				glNormal3f(p1.x / _R, p1.y / _R, p1.y / _R);
+				prx_glVertex3f(p1.x, p1.y, p1.z);
+
+				glNormal3f(p2.x / _R, p2.y / _R, p2.z / _R);
+				prx_glVertex3f(p2.x, p2.y, p2.z);
+
+				glNormal3f(p3.x / _R, p3.y / _R, p3.z / _R);
+				prx_glVertex3f(p3.x, p3.y, p3.z);
+
+				glNormal3f(p4.x / _R, p4.y / _R, p4.z / _R);
+				prx_glVertex3f(p4.x, p4.y, p4.z);
+			prx_glEnd();
 		}
 
 	}
+	prx_finishFigure();
 }
 
 

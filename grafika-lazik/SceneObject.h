@@ -4,6 +4,11 @@
 #include <memory>
 #include <functional>
 #include "Physics.h"
+#include <string>
+#include <iostream>
+#include <strstream>
+#include <sstream>
+#include <Windows.h>
 
 
 #define RAD(deg) deg*GL_PI/180.0f
@@ -16,7 +21,6 @@ class SceneObject
 {
 	friend class PhysicsEngine;
 private:
-	std::vector<std::unique_ptr<SceneObject>> _children;
 	std::string _name;
 	bool _hide = false;
 	bool _isChild = false;
@@ -30,6 +34,7 @@ private:
 	std::string getBaseName() const;
 	BoundingBox* _boundingBox = nullptr;
 protected:
+	std::vector<std::unique_ptr<SceneObject>> _children;
 	Vector3 _position;
 	Vector3 _rotation;
 	Vector3 _color;
@@ -133,6 +138,144 @@ public:
 	void setHasPhysics(bool s) { _hasPhysics = s; }
 	bool isStatic() { return _isStatic; }
 	void setStatic(bool s) { _isStatic = s; }
+
+
+
+private:
+	inline void prx_initMode()
+	{
+		switch(_mode)
+		{
+		case GL_TRIANGLE_FAN:
+			if(_triangleFan == nullptr)
+				_triangleFan = new std::vector<Vector3>();
+			break;
+		case GL_TRIANGLE_STRIP:
+			if(_triangleStrip == nullptr)
+				_triangleStrip = new std::vector<Vector3>();
+			break;
+		}
+	}
+	inline void prx_addVertex(GLfloat x, GLfloat y, GLfloat z)
+	{
+		switch (_mode)
+		{
+		case GL_TRIANGLE_FAN:
+			_triangleFan->push_back({ x,y,z });
+			break;
+		case GL_TRIANGLE_STRIP:
+			_triangleStrip->push_back({ x,y,z });
+			break;
+		default:
+			throw new std::exception();
+		}
+	}
+	protected:
+#define DBOUT( s )            \
+{                             \
+   std::wostringstream os_;    \
+   os_ << s;                   \
+   OutputDebugStringW( os_.str().c_str() );  \
+}
+		bool _finished = false;
+		std::vector<Vector3>* _triangleStrip = nullptr;
+		int ts = 0;
+		std::vector<Vector3>* _triangleFan = nullptr;
+		int tf = 0;
+		GLenum _mode;
+		inline void prx_glBegin(GLenum mode)
+		{
+			if (!_finished) {
+				_mode = mode;
+				prx_initMode();
+			}
+
+			glBegin(mode);
+		}
+		inline void prx_glEnd()
+		{
+			if(!_finished)
+			{
+				prx_addVertex(Vector3::INF.x, Vector3::INF.y, Vector3::INF.z);
+			}
+
+			glEnd();
+		}
+		inline void prx_glVertex3f(GLfloat x, GLfloat y, GLfloat z)
+		{
+			if(!_finished)
+			{
+				prx_addVertex(x, y, z);
+			}
+			glVertex3f(x, y, z);
+		}
+		inline void prx_finishFigure()
+		{
+			if (!_finished) {
+				/*if (_triangleStrip != nullptr) {
+					for (Vector3 vec : *_triangleStrip)
+					{
+						if (vec.x == Vector3::INF.x)
+							continue;
+						DBOUT("v ");
+						DBOUT(vec.x);
+						DBOUT(" ")
+							DBOUT(vec.y);
+						DBOUT(" ")
+							DBOUT(vec.z);
+						DBOUT("\n")
+					}
+
+					int j = 0;
+					DBOUT("f ");
+					DBOUT(j + 1);
+					DBOUT(" ");
+					DBOUT(j + 2);
+					DBOUT(" ");
+					DBOUT(j + 3);
+					DBOUT("\n");
+
+					DBOUT("f ");
+					DBOUT(j + 2);
+					DBOUT(" ");
+					DBOUT(j + 4);
+					DBOUT(" ");
+					DBOUT(j + 3);
+					DBOUT("\n");
+					j += 2;
+					int i = j;
+					for (; i < _triangleStrip->size()-2; i+=2)
+					{
+						Vector3& vec = _triangleStrip->at(i);
+						if (vec.x == Vector3::INF.x)
+							continue;
+						if(j+4 > _triangleStrip->size()-2)
+							break;
+						DBOUT("f ");
+						DBOUT(j + 1);
+						DBOUT(" ");
+						DBOUT(j + 2);
+						DBOUT(" ");
+						DBOUT(j + 3);
+						DBOUT("\n");
+
+						DBOUT("f ");
+						DBOUT(j + 2);
+						DBOUT(" ");
+						DBOUT(j + 3);
+						DBOUT(" ");
+						DBOUT(j + 4);
+						DBOUT("\n");
+						j += 2;
+					}
+				}*/
+			}
+			_finished = true;
+		}
+		inline void prx_beginFigure()
+		{
+			
+		}
 };
 
 

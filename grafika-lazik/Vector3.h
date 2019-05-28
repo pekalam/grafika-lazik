@@ -8,6 +8,7 @@
 class Vector3
 {
 public:
+	static Vector3 INF;
 	GLfloat x, y, z;
 	Vector3(GLfloat x = 0, GLfloat y = 0, GLfloat z = 0) : x(x), y(y), z(z) {};
 
