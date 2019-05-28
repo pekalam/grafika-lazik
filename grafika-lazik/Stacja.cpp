@@ -8,7 +8,7 @@
 #include "PierscienG.h"
 
 
-Stacja::Stacja(Vector3 position, Vector3 rotation, Vector3 color) : SceneObject(position, rotation, color)
+Stacja::Stacja(Vector3 position, Vector3 rotation, Vector3 color) : SceneObject("stacja", position, rotation, {}, color)
 {
 	//Vector3 pos = { -220, 4, -50 };
 	Vector3 pos = { 0, 4, 0 };

@@ -262,7 +262,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 void TW_CALL Scene1(void *clientData)
 {
-	s++;
+	/*s++;
 	s = s % 2;
 	if (scene != nullptr) {
 		ViewEngine::instance().removeObject(scene->name());
@@ -276,7 +276,7 @@ void TW_CALL Scene1(void *clientData)
 	case 1:
 		scene = new ScenaTestowa();
 		break;
-	}
+	}*/
 	
 
 }

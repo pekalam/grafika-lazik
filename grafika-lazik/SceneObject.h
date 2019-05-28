@@ -9,6 +9,7 @@
 #include <strstream>
 #include <sstream>
 #include <Windows.h>
+#include <fstream>
 
 
 #define RAD(deg) deg*GL_PI/180.0f
@@ -42,17 +43,17 @@ protected:
 	virtual void drawObject() {};
 public:
 	static Vector3 currentColor;
-	SceneObject(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = {0,0,0}, float m = 0) : 
-		_position(position), 
+	SceneObject(Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, Vector3 color = { 0,0,0 }, float m = 0) :
+		_position(position),
 		_rotation(rotation),
 		_color(color),
 		_physics(PhysicsConfig::Default, m)
 	{
 		_create();
 	};
-	SceneObject(std::string name, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, std::vector<SceneObject*> children = {}, Vector3 color = {0,0,0}, float m = 0) 
-		: _name(name), 
-		_position(position), 
+	SceneObject(std::string name, Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, std::vector<SceneObject*> children = {}, Vector3 color = { 0,0,0 }, float m = 0)
+		: _name(name),
+		_position(position),
 		_rotation(rotation),
 		_color(color),
 		_physics(PhysicsConfig::Default, m)
@@ -98,14 +99,14 @@ public:
 
 
 	// ustala pozycje obiektu
-	void position(const Vector3& vector3){_position = vector3;}
-	void positionX(GLfloat x){_position.x = x;}
+	void position(const Vector3& vector3) { _position = vector3; }
+	void positionX(GLfloat x) { _position.x = x; }
 	void positionY(GLfloat y) { _position.y = y; }
 	void positionZ(GLfloat z) { _position.z = z; }
 	Vector3 position() const { return _position; }
 
 	// ustala obrot obiektu (w radianach)
-	void rotation(const Vector3& vector3){_rotation = vector3;}
+	void rotation(const Vector3& vector3) { _rotation = vector3; }
 	void rotationX(GLfloat x) { _rotation.x = x; }
 	void rotationY(GLfloat y) { _rotation.y = y; }
 	void rotationZ(GLfloat z) { _rotation.z = z; }
@@ -114,7 +115,7 @@ public:
 
 	/** rysuje obiekt i obiekty potomne na scenie */
 	void render();
-	
+
 
 	int childrenCount() const { return _children.size(); }
 	const std::string &name() const { return _name; }
@@ -123,8 +124,8 @@ public:
 	void show() { _hide = false; }
 	bool isVisible() { return !_hide; }
 	bool isChild() const { return _isChild; }
-	Vector3 color() const{return _color;}
-	void color(const Vector3& vector3){_color = vector3;}
+	Vector3 color() const { return _color; }
+	void color(const Vector3& vector3) { _color = vector3; }
 
 	Physics& getPhysics()
 	{
@@ -140,29 +141,27 @@ public:
 	void setStatic(bool s) { _isStatic = s; }
 
 
+};
 
+
+
+//OBJ EXPORT
+/*
 private:
-	inline void prx_initMode()
+	inline void initMode()
 	{
 		switch(_mode)
 		{
-		case GL_TRIANGLE_FAN:
-			if(_triangleFan == nullptr)
-				_triangleFan = new std::vector<Vector3>();
-			break;
 		case GL_TRIANGLE_STRIP:
 			if(_triangleStrip == nullptr)
 				_triangleStrip = new std::vector<Vector3>();
 			break;
 		}
 	}
-	inline void prx_addVertex(GLfloat x, GLfloat y, GLfloat z)
+	inline void addVertex(GLfloat x, GLfloat y, GLfloat z)
 	{
 		switch (_mode)
 		{
-		case GL_TRIANGLE_FAN:
-			_triangleFan->push_back({ x,y,z });
-			break;
 		case GL_TRIANGLE_STRIP:
 			_triangleStrip->push_back({ x,y,z });
 			break;
@@ -180,36 +179,34 @@ private:
 		bool _finished = false;
 		std::vector<Vector3>* _triangleStrip = nullptr;
 		int ts = 0;
-		std::vector<Vector3>* _triangleFan = nullptr;
-		int tf = 0;
 		GLenum _mode;
-		inline void prx_glBegin(GLenum mode)
+		inline void glBegin(GLenum mode)
 		{
 			if (!_finished) {
 				_mode = mode;
-				prx_initMode();
+				initMode();
 			}
 
 			glBegin(mode);
 		}
-		inline void prx_glEnd()
+		inline void glEnd()
 		{
 			if(!_finished)
 			{
-				prx_addVertex(Vector3::INF.x, Vector3::INF.y, Vector3::INF.z);
+				addVertex(Vector3::INF.x, Vector3::INF.y, Vector3::INF.z);
 			}
 
 			glEnd();
 		}
-		inline void prx_glVertex3f(GLfloat x, GLfloat y, GLfloat z)
+		inline void glVertex3f(GLfloat x, GLfloat y, GLfloat z)
 		{
 			if(!_finished)
 			{
-				prx_addVertex(x, y, z);
+				addVertex(x, y, z);
 			}
 			glVertex3f(x, y, z);
 		}
-		inline void prx_finishFigure()
+		inline void finishFigure()
 		{
 			if (!_finished) {
 				/*if (_triangleStrip != nullptr) {
@@ -268,14 +265,156 @@ private:
 						DBOUT("\n");
 						j += 2;
 					}
-				}*/
+				}
 			}
 			_finished = true;
 		}
-		inline void prx_beginFigure()
+		inline void beginFigure()
 		{
 			
 		}
+private:
+	void genVert(std::unique_ptr<SceneObject> &ch, Vector3 &parent)
+	{
+		auto par = ch->position();
+		parent.x += par.x; parent.y += par.y; parent.z += par.z;
+		if(ch->_triangleStrip != nullptr)
+		{
+			int j = 0;
+			int i = 0;
+			while(i != ch->_triangleStrip->size())
+			{
+				auto vec = ch->_triangleStrip->at(i);
+				if (vec.x == Vector3::INF.x)
+				{
+					i++;
+					continue;
+				}
+				if(j == 0)
+				{
+					DBOUT("  facet normal 0 0 0\n");
+					DBOUT("    outer loop\n");
+				}
+				if(j < 3)
+				{
+					DBOUT("      vertex ");
+					DBOUT(vec.x); DBOUT(" ");
+					DBOUT(vec.y); DBOUT(" ");
+					DBOUT(vec.z); DBOUT("\n");
+					j++;
+				}
+				if(j == 3)
+				{
+					j = 0;
+					DBOUT("    endloop\n");
+					DBOUT("  endfacet\n");
+				}
+
+				
+				i++;
+			}
+			/*for (Vector3& vec : *ch->_triangleStrip)
+			{
+				if (vec.x == Vector3::INF.x)
+					continue;
+				DBOUT("v ");
+				DBOUT(vec.x + parent.x);
+				DBOUT(" ")
+					DBOUT(vec.y + parent.y);
+				DBOUT(" ")
+					DBOUT(vec.z + parent.z);
+				DBOUT("\n")
+			}
+		}
+		
+		for (auto& chChild : ch->_children)
+		{
+			genVert(chChild, parent);
+		}
+	}
+	void genFac(std::unique_ptr<SceneObject> &ch, int &j)
+	{
+		std::vector<Vector3>* childVert = nullptr;
+		childVert = ch.get()->_triangleStrip;
+		if(childVert != nullptr)
+		{
+			DBOUT(std::string("o " + ch->name()).c_str())
+			DBOUT("\n")
+			DBOUT("f ");
+			DBOUT(j + 1);
+			DBOUT(" ");
+			DBOUT(j + 2);
+			DBOUT(" ");
+			DBOUT(j + 3);
+			DBOUT("\n");
+
+			DBOUT("f ");
+			DBOUT(j + 2);
+			DBOUT(" ");
+			DBOUT(j + 4);
+			DBOUT(" ");
+			DBOUT(j + 3);
+			DBOUT("\n");
+			j += 2;
+
+			int loc = 2;
+			int i = loc;
+			for (; i < childVert->size() - 2; i += 2)
+			{
+				Vector3& vec = childVert->at(i);
+				if (vec.x == Vector3::INF.x)
+					continue;
+				if (loc + 4 > childVert->size() - 2)
+					break;
+				DBOUT("f ");
+				DBOUT(j + 1);
+				DBOUT(" ");
+				DBOUT(j + 2);
+				DBOUT(" ");
+				DBOUT(j + 3);
+				DBOUT("\n");
+
+				DBOUT("f ");
+				DBOUT(j + 2);
+				DBOUT(" ");
+				DBOUT(j + 3);
+				DBOUT(" ");
+				DBOUT(j + 4);
+				DBOUT("\n");
+				j += 2;
+			}
+		}
+
+		for (auto& chChild : ch->_children)
+		{
+			genFac(chChild, j);
+		}
+	}
+public:
+	void generateObj(std::string path)
+	{
+		if (path.size() == 0)
+			throw new std::exception();
+		//std::fstream f(path);
+		//std::stringstream str;
+
+		
+		std::vector<Vector3>* childVert = nullptr;
+		for(auto& child : _children)
+		{
+			genVert(child, _position);
+		}
+
+		int j = 0;
+		for (auto& child : _children)
+		{
+			//genFac(child, j);
+		}
+		
+
+		//f << str.str();
+		//f.close();
+	}
 };
 
-
+*/
