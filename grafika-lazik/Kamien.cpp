@@ -32,6 +32,8 @@ Kamien::Kamien(GLfloat r, Vector3 position, Vector3 rotation, Vector3 color) : I
 		{0.199,0.140,0.07}
 		};
 	setGradient(gradient);
+
+	
 }
 
 Kamien::Kamien(const Kamien& cp) : Icosphere42(cp)

@@ -3,8 +3,10 @@
 #include <iostream>
 #include <string>
 #include <istream>
-#include <sstream>
 #include <fstream>
+//#include "IL/il.h"
+//#define TINYOBJLOADER_IMPLEMENTATION
+//#include "tiny_obj_loader.h"
 
 int read_binary_STL_file(std::string STL_filename, std::vector<triangle> & facet)
 {
@@ -60,20 +62,56 @@ int read_binary_STL_file(std::string STL_filename, std::vector<triangle> & facet
 	file.close();
 }
 
+
+
+/*int LoadImage()
+{
+	ILboolean success;
+	ILuint image;
+
+	ilGenImages(1, &image); 
+	ilBindImage(image); 
+	success = ilLoadImage((wchar_t const*)"C:\\Users\\Marek\\Desktop\\grafika-lazik\\piach.png"); 
+
+	if (success)
+	{
+		success = ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+
+		if (!success)
+		{
+			return -1;
+		}
+	}
+	else
+		return -1;
+
+	return image;
+}*/
+
 void Powierzchnia::drawObject()
 {
-	glBegin(GL_TRIANGLE_STRIP);
-	glColor3f(0.593, 0.3906, 0.1953);
-	for (int i = 0; i < triangles->size(); i++)
-	{
-		glVertex3f(triangles->at(i).point.x, triangles->at(i).point.y, triangles->at(i).point.z);
-	}
-	glEnd();
+
 }
 
 Powierzchnia::Powierzchnia(Vector3 position) : SceneObject(position)
 {
-	triangles = new std::vector<triangle>();
-	read_binary_STL_file("C:\\Users\\Marek\\Desktop\\grafika-lazik\\landscape.stl", *triangles);
+	getPhysics().setDynamicFrictionCoefficient(0.7);
+	setHasPhysics(true);
+	setStatic(true);
+	isGround(true);
+	setBoundingBox(500, 4, 500);
+	join(new ScianaG(500, 500, 250, 250, {}, {}, { 0.2656, 0.2109, 0.144 }));
+
+
+
+	/*bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, inputfile.c_str());
+	if (!warn.empty())
+		OutputDebugStringA(warn.c_str());
+	if (!err.empty())
+		OutputDebugStringA(err.c_str());
+	if (!ret)
+		throw new std::exception();*/
+
+
 }
 

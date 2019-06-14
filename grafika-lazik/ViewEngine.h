@@ -22,7 +22,7 @@ private:
 	glm::vec3 _cameraLookDir;
 	std::unique_ptr<Axes> _axes;
 	unsigned short _polygonModeFace = GL_FRONT_AND_BACK;
-	unsigned short _polygonModeMode = GL_LINE;
+	unsigned short _polygonModeMode = GL_FILL;
 
 	PhysicsEngine _physicsEngine;
 

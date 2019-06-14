@@ -29,17 +29,18 @@ private:
 	bool _hasPhysics = false;
 	/** Czy dzialaja na niego sily i grawitacja */
 	bool _isStatic = false;
-	Physics _physics;
-private:
+	bool _isGround = false;
+
 	void _create();
 	std::string getBaseName() const;
-	BoundingBox* _boundingBox = nullptr;
 protected:
 	std::vector<std::unique_ptr<SceneObject>> _children;
+	Physics _physics;
 	Vector3 _position;
 	Vector3 _rotation;
 	Vector3 _color;
 	Vector3 _coordRotation;
+	BoundingBox* _boundingBox = nullptr;
 	virtual void drawObject() {};
 public:
 	static Vector3 currentColor;
@@ -124,6 +125,8 @@ public:
 	void show() { _hide = false; }
 	bool isVisible() { return !_hide; }
 	bool isChild() const { return _isChild; }
+	bool isGround() const { return _isGround; }
+	void isGround(bool isGround) { _isGround = isGround; }
 	Vector3 color() const { return _color; }
 	void color(const Vector3& vector3) { _color = vector3; }
 

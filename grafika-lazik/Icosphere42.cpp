@@ -275,6 +275,7 @@ void Icosphere42::drawObject()
 	{
 		if (hasGradient)
 			glColor3f(gradient[0].x, gradient[0].y, gradient[0].z);
+		glNormal3f(verticesX[(indicesX[i] - 1)], verticesY[(indicesX[i] - 1)], verticesZ[(indicesX[i] - 1)]);
 		glVertex3f(
 			_position.x + verticesX[(indicesX[i]-1)]*r,
 			_position.y + verticesY[(indicesX[i]-1)]*r,
@@ -282,6 +283,7 @@ void Icosphere42::drawObject()
 			);
 		if (hasGradient)
 			glColor3f(gradient[1].x, gradient[1].y, gradient[1].z);
+		glNormal3f(verticesX[(indicesY[i] - 1)], verticesY[(indicesY[i] - 1)], verticesZ[(indicesY[i] - 1)]);
 		glVertex3f(
 			_position.x + verticesX[(indicesY[i] - 1)] * r,
 			_position.y + verticesY[(indicesY[i] - 1)]*r,
@@ -289,6 +291,7 @@ void Icosphere42::drawObject()
 		);
 		if (hasGradient)
 			glColor3f(gradient[2].x, gradient[2].y, gradient[2].z);
+		glNormal3f(verticesX[(indicesZ[i] - 1)], verticesZ[(indicesY[i] - 1)], verticesZ[(indicesZ[i] - 1)]);
 		glVertex3f(
 			_position.x + verticesX[(indicesZ[i] - 1)]*r,
 			_position.y + verticesY[(indicesZ[i] - 1)]*r,

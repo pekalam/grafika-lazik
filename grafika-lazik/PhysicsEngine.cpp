@@ -26,7 +26,7 @@ void dynamicFriction()
 
 void PhysicsEngine::update(float dt)
 {
-	static auto sceneObjects = viewEngine.getNonStaticSceneObjects();
+	auto sceneObjects = viewEngine.getNonStaticSceneObjects();
 	
 	if(sceneObjects != nullptr && sceneObjects->size() > 0)
 	{
@@ -43,25 +43,53 @@ void PhysicsEngine::update(float dt)
 						continue;
 					SceneObject& objectB = sceneObjects->at(j).get();
 					Collision collision = object._boundingBox->intersects(&object, &objectB);
-					if(std::get<0>(collision))
+					if(std::get<0>(std::get<0>(collision)))
 					{
+						
 						// jesli obiekt zderza sie z obiektemB po Y
 						if (std::get<1>(collision).y == 1) {
 
+							if (std::get<1>(std::get<0>(collision)))
+							{
+								GLfloat pos = object._position.y + std::get<1>(std::get<0>(collision));
+								object.positionY(pos);
+							}
+							
 							// tarcie dziala zawsze przeciwnie do kierunku poruszania sie 
-							if(object._physics.getVelocity().x > 0)
-								object._physics.addDynamicFrictionFrom(objectB.getPhysics(), { -1, 0, 0 });
-							else if(object._physics.getVelocity().x < 0)
-								object._physics.addDynamicFrictionFrom(objectB.getPhysics(), { 1, 0, 0 });
+							if (objectB.isGround()) {
+								if (object._physics.getVelocity().x > 0)
+									object._physics.addDynamicFrictionFrom(objectB.getPhysics(), { -1, 0, 0 });
+								else if (object._physics.getVelocity().x < 0)
+									object._physics.addDynamicFrictionFrom(objectB.getPhysics(), { 1, 0, 0 });
 
-							if (object._physics.getVelocity().z > 0)
-								object._physics.addDynamicFrictionFrom(objectB.getPhysics(), { 0, 0, -1 });
-							else if (object._physics.getVelocity().z < 0)
-								object._physics.addDynamicFrictionFrom(objectB.getPhysics(), { 0, 0, 1 });
-
-							object._physics.setConstantAcceleration({ 0,0,0 });
+								if (object._physics.getVelocity().z > 0)
+									object._physics.addDynamicFrictionFrom(objectB.getPhysics(), { 0, 0, -1 });
+								else if (object._physics.getVelocity().z < 0)
+									object._physics.addDynamicFrictionFrom(objectB.getPhysics(), { 0, 0, 1 });
+							}
+							object._physics.setConstantAccelerationY(0);
 							object._physics.setInitialVelocityY(0);
+							object._physics.setConstantVelocityY(0);
 							grav = false;
+						}
+						if (std::get<1>(collision).x == 1 || std::get<1>(collision).x == -1)
+						{
+							if (!objectB.isGround()) {
+								object._physics.setConstantAccelerationX(0);
+								object._physics.setInitialVelocityX(0);
+								object._physics.setConstantAccelerationX(0);
+								object._physics.setConstantVelocityX(0);
+							}
+
+						}
+						if (std::get<1>(collision).z == 1 || std::get<1>(collision).z == -1)
+						{
+							if (!objectB.isGround()) {
+								object._physics.setConstantAccelerationZ(0);
+								object._physics.setInitialVelocityZ(0);
+								object._physics.setConstantAccelerationZ(0);
+								object._physics.setConstantVelocityZ(0);
+							}
 						}
 					}
 				}

@@ -39,6 +39,13 @@ public:
 	{
 		x = y = z = 0;
 	}
+
+	void abs()
+	{
+		x = std::fabs(x);
+		y = std::fabs(y);
+		z = std::fabs(z);
+	}
 };
 
 

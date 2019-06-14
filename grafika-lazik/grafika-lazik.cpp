@@ -19,10 +19,14 @@
 #include "ScenaTestowa.h"
 #include "AppGui.h"
 #include <iostream>
+#include "ScenaTestTekstur.h"
 
 
 // [SILNIK FIZYKI]
-#define PH_UPD_TIME 13
+
+#define FPS 30.0f
+#define REND_UPD_TIME 1000.0f/FPS
+#define PH_UPD_TIME 1
 
 
 
@@ -46,6 +50,7 @@ bool ctrlPressed;
 bool shiftPressed;
 GLfloat camPosStep = 3.25f;
 GLfloat camRotStep = 1;
+float predkosc = 0.2;
 
 
 //TODO: SCENA
@@ -53,6 +58,10 @@ GLfloat camRotStep = 1;
 SceneObject* scene;
 int s = -1;
 
+SceneObject* defaultScene()
+{
+	return new ScenaTestTekstur();
+}
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -262,7 +271,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 void TW_CALL Scene1(void *clientData)
 {
-	/*s++;
+	s++;
 	s = s % 2;
 	if (scene != nullptr) {
 		ViewEngine::instance().removeObject(scene->name());
@@ -271,12 +280,12 @@ void TW_CALL Scene1(void *clientData)
 	switch (s)
 	{
 	case 0:
-		scene = new ScenaTestowa();
+		scene = new ScenaTestFiz();
 		break;
 	case 1:
-		scene = new ScenaTestowa();
+		scene = new Scena();
 		break;
-	}*/
+	}
 	
 
 }
@@ -356,13 +365,17 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		{
 			UpdateWindow(hWnd);
 		});
-		scene = new ScenaTestowa();
-		AppGui::instance().addButtonMainBar("Scena1", Scene1, &viewEngine, " label='Scene1' key=c help='Random changes of lights parameters.' ");
+		scene = defaultScene();
+		
+		AppGui::instance().addButtonMainBar("Zmiana sceny", Scene1, &viewEngine, " label='Zmiana sceny' key=c help='Random changes of lights parameters.' ");
+		AppGui::instance().f(&predkosc);
+		AppGui::instance().d();
+		AppGui::instance().g();
 		// [TIMER] Timer dla klatek
-		SetTimer(hWnd, 100, 16, (TIMERPROC)NULL);
+		//SetTimer(hWnd, 100, REND_UPD_TIME, (TIMERPROC)NULL);
 
 		// [TIMER] Timer dla silnika fizyki
-		SetTimer(hWnd, 101, PH_UPD_TIME, (TIMERPROC)NULL);
+		//SetTimer(hWnd, 101, PH_UPD_TIME, (TIMERPROC)NULL);
 		break;
 
 		// Window is being destroyed, cleanup
@@ -392,7 +405,7 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 			InvalidateRect(hWnd, NULL, FALSE);
 			break;
 		case 101:
-			viewEngine.update(PH_UPD_TIME / 1000.0f);
+			viewEngine.update(0.01f);
 			InvalidateRect(hWnd, NULL, FALSE);
 			break;
 		}
@@ -470,25 +483,30 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 	case WM_CHAR:
 		{
 		if (wParam == 'w') {
-			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");
+			auto& lazik = (Lazik&)viewEngine.getByName("scena:lazik");
 
-			lazik.driveForward(0.9);
+			lazik.driveForward(predkosc);
 			
 		}
 		if (wParam == 's') {
-			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");
-
-			lazik.stop();
+			auto& lazik = (Lazik&)viewEngine.getByName("scena:lazik");
+			if (!lazik.stopped())
+			{
+				lazik.stop();
+			}else
+			{
+				lazik.driveForward(-predkosc);
+			}
 		}
 		if(wParam == 'a')
 		{
-			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");
+			auto& lazik = (Lazik&)viewEngine.getByName("scena:lazik");
 
 			lazik.rotateLeft();
 		}
 		if (wParam == 'd')
 		{
-			auto& lazik = (Lazik&)viewEngine.getByName("scenafiz:lazik");
+			auto& lazik = (Lazik&)viewEngine.getByName("scena:lazik");
 
 			lazik.rotateRight();
 		}
@@ -568,7 +586,7 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 			ctrlPressed = TRUE;
 		if (wParam == VK_SHIFT)
 			shiftPressed = TRUE;
-		if (wParam == 'A')
+		if (wParam == 'Q')
 		{
 			auto displayAxes = viewEngine.isDisplayingAxes();
 			viewEngine.displayAxes(!displayAxes);

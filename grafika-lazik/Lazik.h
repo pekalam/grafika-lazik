@@ -30,12 +30,16 @@ public:
 		setStatic(false);
 		setHasPhysics(true);
 		
-		setBoundingBox(26, 12, 24);
+		setBoundingBox(24, 12, 24);
 	}
 
 	void driveForward(float v);
 
 	void stop();
+	bool stopped()
+	{
+		return getPhysics().getVelocity().x == 0 && getPhysics().getVelocity().z == 0;
+	}
 
 	void rotateLeft();
 

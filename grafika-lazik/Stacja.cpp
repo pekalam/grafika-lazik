@@ -7,9 +7,11 @@
 #include "ScianaG.h"
 #include "PierscienG.h"
 
-
 Stacja::Stacja(Vector3 position, Vector3 rotation, Vector3 color) : SceneObject("stacja", position, rotation, {}, color)
 {
+	setHasPhysics(true);
+	setStatic(true);
+	setBoundingBox(180, 140, 140);
 	//Vector3 pos = { -220, 4, -50 };
 	Vector3 pos = { 0, 4, 0 };
 	auto podstawa = new WalecG(8, 78, pos, {90, 0, 0});

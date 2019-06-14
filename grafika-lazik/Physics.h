@@ -29,7 +29,7 @@ public:
 	/** Masa w kg */
 	float getMass();
 	/** Zmiana masy m[kg] */
-	float setMass(float new_m)
+	void setMass(float new_m)
 	{
 		m = new_m;
 	}
@@ -37,43 +37,26 @@ public:
 	{
 		a += acceleration;
 	}
-	void setDynamicFrictionCoefficient(float u)
-	{
-		dynFrictionCoeff = u;
-	}
-	float getDynamicFrictionCoefficient()
-	{
-		return dynFrictionCoeff;
-	}
-	void setAcceleration(const glm::vec3& acceleration)
-	{
-		a = acceleration;
-	}
-	void setConstantAcceleration(const glm::vec3& acceleration)
-	{
-		aConst = acceleration;
-	}
-	void setConstantVelocity(const glm::vec3& velocity)
-	{
-		vConst = velocity;
-	}
-	glm::vec3 getConstantVelocity()
-	{
-		return vConst;
-	}
-	glm::vec3 getInitialVelocity()
-	{
-		return v0;
-	}
-	void setInitialVelocityY(float y)
-	{
-		v0.y = y;
-	}
-	void setInitialVelocity(const glm::vec3& velocity)
-	{
-		v0 = velocity;
-	}
+	void setDynamicFrictionCoefficient(float u){dynFrictionCoeff = u;}
+	float getDynamicFrictionCoefficient(){return dynFrictionCoeff;}
+	void setAcceleration(const glm::vec3& acceleration){a = acceleration;}
+	void setConstantAcceleration(const glm::vec3& acceleration){aConst = acceleration;}
+	void setConstantAccelerationX(float x){aConst.x = x;}
+	void setConstantAccelerationZ(float z){aConst.z = z;}
+	void setConstantAccelerationY(float y){aConst.y = y;}
+
+	glm::vec3 getConstantVelocity() { return vConst; }
+	void setConstantVelocity(const glm::vec3& velocity){vConst = velocity;}
+	void setConstantVelocityX(float x) { vConst.x = x; }
+	void setConstantVelocityY(float y) { vConst.y = y; }
+	void setConstantVelocityZ(float z) { vConst.z = z; }
+
+	glm::vec3 getInitialVelocity(){return v0;}
+	void setInitialVelocity(const glm::vec3& velocity){v0 = velocity;}
 	void setInitialVelocityX(float x) { v0.x = x; }
+	void setInitialVelocityY(float y) { v0.y = y; }
+	void setInitialVelocityZ(float z) { v0.z = z; }
+
 	void addDynamicFrictionFrom(Physics& ph, glm::vec3 dir)
 	{
 		//jezeli obiekt porusza sie wystepuje tarcie dynamiczne

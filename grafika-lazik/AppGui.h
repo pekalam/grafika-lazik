@@ -1,5 +1,7 @@
 #pragma once
 #include "AntTweakBar.h"
+#include "BoundingBox.h"
+#include "PhysicsEngine.h"
 
 class AppGui
 {
@@ -25,6 +27,19 @@ public:
 		TwAddButton(_mainBar, title.c_str(), callback, clientData, config.c_str());
 
 	
+	}
+	void f(float* v)
+	{
+		TwAddVarRW(_mainBar, "predkosc", TW_TYPE_FLOAT, v, "");
+	}
+	void d()
+	{
+		TwAddVarRW(_mainBar, "Pokaz siatke kolizji", TW_TYPE_BOOLCPP, &BoundingBox::draw, "");
+	}
+
+	void g()
+	{
+		TwAddVarRW(_mainBar, "grawitacja", TW_TYPE_FLOAT, &PhysicsConfig::Default.g.y, "");
 	}
 };
 

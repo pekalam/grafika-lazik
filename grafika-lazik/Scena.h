@@ -5,6 +5,7 @@
 #include "Icosphere42.h"
 #include "Kamien.h"
 #include "Stacja.h"
+#include "SzescianG.h"
 
 
 class Scena :
@@ -18,10 +19,11 @@ public:
 };
 
 
-inline Scena::Scena(Vector3 position, Vector3 rotation, Vector3 color) : SceneObject(position, rotation, color)
+inline Scena::Scena(Vector3 position, Vector3 rotation, Vector3 color) : SceneObject("scena", position, rotation, {}, color)
 {
-	join(new Powierzchnia({ 0,-13.7 }));
-	join(new Lazik({ 0, 0, 0 }));
+	join(new Powierzchnia({ 0,0 }));
+	join(new Lazik({ 0, 2, 0 }));
+	
 	std::random_device rd;
 	std::mt19937 e2(rd());
 	float rg = 100;
@@ -29,12 +31,13 @@ inline Scena::Scena(Vector3 position, Vector3 rotation, Vector3 color) : SceneOb
 	std::uniform_real_distribution<> distY(-50, 30);
 	std::uniform_real_distribution<> distR(1, 3);
 	std::uniform_int_distribution<> distPatt(0, 99);
-	Kamien* patt[100];
-	for (int i = 0; i < 100; i++)
+	Kamien* patt[200];
+	for (int i = 0; i < 200; i++)
 	{
 		patt[i] = new Kamien(distR(e2), { (float)distX(e2), 0, -(float)distY(e2) });
 		join(patt[i]);
 	}
+	/*
 	for (int i = 0; i < 1700; i++) {
 		auto r = distPatt(e2);
 		auto rock = new Kamien(*patt[r]);
@@ -50,7 +53,17 @@ inline Scena::Scena(Vector3 position, Vector3 rotation, Vector3 color) : SceneOb
 		rock->positionZ(-(float)distY2(e2));
 		rock->positionY(1);
 		join(rock);
-	}
+	}*/
+	auto prz = new SzescianG(10, 10, 10, { 50, 40, 0 });
+	prz->setBoundingBox(15,10,10);
+	prz->setHasPhysics(true);
+	join(prz);
+	auto prz2 = new SzescianG(10, 10, 10, { -80, 40, 20 });
+	prz2->setBoundingBox(15, 10, 10);
+	prz2->setHasPhysics(true);
+	join(prz2);
+
+
 	auto k1 = new Kamien(40, { 50, 0, -10 });
 	Vector3 g[3] = { { 0.456f,0.328f,0.1328f }, { 0.456f,0.328f,0.1328f }, { 0.456f,0.328f,0.1328f } };
 	k1->setGradient(g);
@@ -58,7 +71,7 @@ inline Scena::Scena(Vector3 position, Vector3 rotation, Vector3 color) : SceneOb
 	k2->setGradient(g);
 	auto k3 = new Kamien(40, { 50, 0, 40 });
 	k3->setGradient(g);
-	auto k4 = new Kamien(40, { 50, 1, 60 });
+	auto k4 = new Kamien(40, { 50, 0, 60 });
 	k4->setGradient(g);
 
 	join(k1);
