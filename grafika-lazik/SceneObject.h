@@ -5,14 +5,14 @@
 #include <functional>
 #include "Physics.h"
 #include <string>
-#include <iostream>
-#include <strstream>
-#include <sstream>
-#include <Windows.h>
-#include <fstream>
-
+#include "Texture2D.h"
 
 #define RAD(deg) deg*GL_PI/180.0f
+#define TEXTURE2D(s,t) if(textures2D.size()) textures2D[currentTexture]->coord(s,t);
+#define TEX2D_UPPER_LEFT TEXTURE2D(0,1)
+#define TEX2D_LOWER_LEFT TEXTURE2D(0,0)
+#define TEX2D_UPPER_RIGHT TEXTURE2D(1,1)
+#define TEX2D_LOWER_RIGHT TEXTURE2D(1,0)
 
 class ViewEngine;
 class BoundingBox;
@@ -30,7 +30,6 @@ private:
 	/** Czy dzialaja na niego sily i grawitacja */
 	bool _isStatic = false;
 	bool _isGround = false;
-
 	void _create();
 	std::string getBaseName() const;
 protected:
@@ -41,6 +40,11 @@ protected:
 	Vector3 _color;
 	Vector3 _coordRotation;
 	BoundingBox* _boundingBox = nullptr;
+	std::vector<std::unique_ptr<Texture2D>> textures2D;
+	int currentTexture = 0;
+	void glBegin(GLenum mode);
+	void glEnd();
+	void nextTex() { currentTexture = ++currentTexture % (!textures2D.size() ? 1 : textures2D.size()); }
 	virtual void drawObject() {};
 public:
 	static Vector3 currentColor;
@@ -98,7 +102,6 @@ public:
 	/** zwraca obiekt potomny */
 	SceneObject* child(const std::string name);
 
-
 	// ustala pozycje obiektu
 	void position(const Vector3& vector3) { _position = vector3; }
 	void positionX(GLfloat x) { _position.x = x; }
@@ -111,12 +114,13 @@ public:
 	void rotationX(GLfloat x) { _rotation.x = x; }
 	void rotationY(GLfloat y) { _rotation.y = y; }
 	void rotationZ(GLfloat z) { _rotation.z = z; }
-
 	Vector3 rotation() const { return _rotation; }
+
+	void addTexture(Texture2D *tex) {textures2D.push_back(std::unique_ptr<Texture2D>(tex));}
+	void clearTextures() { textures2D.clear(); }
 
 	/** rysuje obiekt i obiekty potomne na scenie */
 	void render();
-
 
 	int childrenCount() const { return _children.size(); }
 	const std::string &name() const { return _name; }
@@ -129,21 +133,14 @@ public:
 	void isGround(bool isGround) { _isGround = isGround; }
 	Vector3 color() const { return _color; }
 	void color(const Vector3& vector3) { _color = vector3; }
-
-	Physics& getPhysics()
-	{
-		return _physics;
-	}
-
+	Physics& getPhysics(){return _physics;}
 	void setBoundingBox(int lengthx, int heighty, int widthz);
-	BoundingBox* getBoundingBox();
+	BoundingBox* getBoundingBox(){ return _boundingBox; }
 	/** Uwzglednienie obiektu przez silnik fizyki */
 	bool hasPhysics() { return _hasPhysics; }
 	void setHasPhysics(bool s) { _hasPhysics = s; }
 	bool isStatic() { return _isStatic; }
 	void setStatic(bool s) { _isStatic = s; }
-
-
 };
 
 

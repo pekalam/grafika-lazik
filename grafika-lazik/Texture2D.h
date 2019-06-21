@@ -8,7 +8,7 @@ private:
 	GLuint texture;
 	int coordCalled = 0;
 public:
-	Texture2D(std::string fileName);
+	Texture2D(std::string fileName, bool repeat = false);
 	void coord(GLfloat s, GLfloat t);
 	void begin();
 	void end();

@@ -19,6 +19,20 @@ void SceneObject::_create()
 	ViewEngine::instance().registerObject(*this);
 }
 
+void SceneObject::glBegin(GLenum mode)
+{
+	if (textures2D.size() && textures2D[currentTexture] != nullptr)
+		textures2D[currentTexture]->begin();
+	::glBegin(mode);
+}
+
+void SceneObject::glEnd()
+{
+	::glEnd();
+	if (textures2D.size() && textures2D[currentTexture] != nullptr)
+		textures2D[currentTexture]->end();
+}
+
 SceneObject::~SceneObject()
 {
 	ViewEngine::instance().unregisterObject(*this);
@@ -104,9 +118,4 @@ void SceneObject::setBoundingBox(int lengthx, int heighty, int widthz)
 	boundingBox->setSizes(lengthx, heighty, widthz);
 	_boundingBox = boundingBox;
 	join(boundingBox);
-}
-
-BoundingBox* SceneObject::getBoundingBox()
-{
-	return _boundingBox;
 }

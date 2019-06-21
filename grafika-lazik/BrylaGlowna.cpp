@@ -10,12 +10,22 @@ BrylaGlowna::
 BrylaGlowna(Vector3 position, Vector3 rotation, std::vector<SceneObject*> children, Vector3 color): SceneObject(
 	"bryla-glowna", position, rotation, children, color)
 {
-	join(new SzescianG("bryla-glowna-cz1", 15, 6, 20, {0, 0, 0}, {0, 0, 0}, 15, 6, 20, {0.1875f, 0.218f, 0.4179f}));
+	auto cz1 = new SzescianG("bryla-glowna-cz1", 15, 6, 20, { 0, 0, 0 }, { 0, 0, 0 }, 15, 6, 20, { 0.1875f, 0.218f, 0.4179f });
+	cz1->addTexture(nullptr);
+	cz1->addTexture(new Texture2D("prz.bmp"));
+	cz1->addTexture(new Texture2D("prz.bmp"));
+	cz1->addTexture(new Texture2D("prz.bmp"));
+	
+	cz1->addTexture(new Texture2D("prz.bmp"));
+	
+	cz1->addTexture(new Texture2D("prz.bmp"));
+	
+	join(cz1);
 	join(new SceneObject("bryla-glowna-cz2", {0, 0, 10}, {0, 0, 0}, {
 		new ScianaG("bryla-glowna-cz2-1", 15, 3, 15, 3, {0, 3, 1.5}),
-		new TrapezRownoramiennyG("bryla-glowna-cz2-2", 3, 6, 4, true, false, 4, {7.5, 1, 1.5}, {0, 180, 90}, {1, 1, 0}),
-		new TrapezRownoramiennyG("bryla-glowna-cz2-3", 3, 6, 4, true, false, 4, {-7.5, 1, 1.5}, {180, 180, -90},
-		                         {1, 1, 0}),
+		new TrapezRownoramiennyG("bryla-glowna-cz2-2", 3, 6, 4, true, false, 4, {7.5, 1, 1.5}, {0, 180, 90}, {0, 0, 1}),
+		new TrapezRownoramiennyG("bryla-glowna-cz2-3", 3, 6, 4, true, false, 4, {-7.5, 1, 1.5}, {0, -180, 90},
+		                         {0, 0, 1}),
 		new ScianaG("bryla-glowna-cz2-4", 15, std::sqrt(3 * 3 + 2 * 2), 15, 3, {0, -2, 1.5}, {-33.691, 0, 0},
 		            {0, 0, 0}),
 		new ScianaG("bryla-glowna-cz2-5", 11, 4, 11, 4, {0, 1, 3}, {90, 0, 0}, {0.2, 0.7, 0.7}),

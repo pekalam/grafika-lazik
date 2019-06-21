@@ -97,7 +97,7 @@ void BoundingBox::drawObject()
 	glPopMatrix();
 }
 
-Collision BoundingBox::intersects(SceneObject* objectA, SceneObject* objectB)
+Collision BoundingBox::intersects(SceneObject* objectA, SceneObject* objectB, Vector3 &distance)
 {
 	auto colliding = false;
 	Vector3 coldir{ 0,0,0 };
@@ -105,28 +105,28 @@ Collision BoundingBox::intersects(SceneObject* objectA, SceneObject* objectB)
 	auto aBox = objectA->getBoundingBox();
 	auto bBox = objectB->getBoundingBox();
 	if (bBox == nullptr || aBox == nullptr)
-		return Collision({ colliding,false }, coldir);
+		return Collision({ colliding,{} }, coldir);
 	auto aPos = objectA->position();
 	auto aLen = aBox->length;
-	auto aWidth = aBox->width;
 	auto aHeight = aBox->height;
 
 	auto bPos = objectB->position();
 	auto bLen = bBox->length;
-	auto bWidth = bBox->width;
 	auto bHeight = bBox->height;
 
 	bool xInters = false;
 	bool yInters = false;
 	bool zInters = false;
-	GLfloat depth = 0;
+	float depthX = 0;
+	float depthY = 0;
+	float depthZ = 0;
 
 
 	if (std::fabs(aPos.y - bPos.y) - (aHeight + bHeight) < 0.01f)
 	{
 		if (std::fabs(aPos.y - bPos.y) < (aHeight + bHeight))
 		{
-			depth = (aHeight + bHeight) - std::fabs(aPos.y - bPos.y);
+			depthY = (aHeight + bHeight) - std::fabs(aPos.y - bPos.y);
 		}
 		yInters = true;
 		if (aPos.y > bPos.y)
@@ -135,12 +135,33 @@ Collision BoundingBox::intersects(SceneObject* objectA, SceneObject* objectB)
 			coldir.y = -1;
 	}
 
-	float dst = sqrt((aPos.x - bPos.x) * (aPos.x - bPos.x) +
-		(aPos.z - bPos.z) * (aPos.z - bPos.z));
+	distance.x = aPos.x - bPos.x;
+	distance.z = aPos.z - bPos.z;
+
+	float dst = sqrt(distance.x * distance.x +
+		distance.z * distance.z);
 	if (dst - (bLen + aLen) < 0.01f)
 	{
+		if(std::fabs(distance.x) < (aLen + bLen))
+		{
+			depthX = (aLen + bLen) - std::fabs(distance.x);
+		}
+		if (std::fabs(distance.z) < (aLen + bLen))
+		{
+			depthZ = (aLen + bLen) - std::fabs(distance.z);
+		}
+
 		xInters = zInters = true;
 		coldir.x = 1; coldir.z = 1;
+	}
+
+	if(depthX < depthY || depthZ < depthY)
+	{
+		depthY = 0;
+	}
+	else if(depthY < depthX && depthY < depthZ)
+	{
+		depthX = depthZ = 0;
 	}
 
 
@@ -174,7 +195,7 @@ Collision BoundingBox::intersects(SceneObject* objectA, SceneObject* objectB)
 	
 	
 	return Collision(
-		{ xInters && yInters && zInters , depth}, 
+		{ xInters && yInters && zInters , {depthX, depthY, depthZ}}, 
 		coldir);
 }
 

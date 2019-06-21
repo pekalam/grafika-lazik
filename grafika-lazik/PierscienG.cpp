@@ -19,6 +19,8 @@ void PierscienG::drawObject()
 	}
 	glEnd();
 
+	nextTex();
+
 	GLfloat r2 = _r + _szer;
 	glBegin(GL_TRIANGLE_STRIP);
 	for (int i = 0; i <= _sections; i++)
@@ -26,8 +28,10 @@ void PierscienG::drawObject()
 		GLfloat x = r2 * cos(i * step);
 		GLfloat y = r2 * sin(i * step);
 		glNormal3f(x, y, 0);
+		TEXTURE2D(i / (float)_sections, 0);
 		glVertex3f(x, y, -_h / 2);
 		glNormal3f(x, y, 0);
+		TEXTURE2D(i / (float)_sections, 1);
 		glVertex3f(x, y, _h / 2);
 		
 	}

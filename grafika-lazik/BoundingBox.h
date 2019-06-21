@@ -2,7 +2,7 @@
 #include "SceneObject.h"
 
 
-typedef std::tuple<std::tuple<bool, GLfloat>, Vector3> Collision;
+typedef std::tuple<std::tuple<bool, Vector3>, Vector3> Collision;
 
 class BoundingBox : public SceneObject
 {
@@ -33,7 +33,7 @@ public:
 	{
 		throw std::exception("Cannot set bounding box of bounding box");
 	}
-	static Collision intersects(SceneObject* objectA, SceneObject* objectB);
+	static Collision intersects(SceneObject* objectA, SceneObject* objectB, Vector3& dst);
 	~BoundingBox();
 };
 

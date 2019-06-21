@@ -3,9 +3,9 @@
 #include "TextureLoader.h"
 
 
-Texture2D::Texture2D(std::string fileName)
+Texture2D::Texture2D(std::string fileName, bool repeat)
 {
-	this->texture = TextureLoader::getInstance().loadTexture2D(fileName);
+	this->texture = TextureLoader::getInstance().loadTexture2D(fileName, repeat);
 }
 
 void Texture2D::coord(GLfloat s, GLfloat t)

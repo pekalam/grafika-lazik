@@ -26,7 +26,7 @@
 
 #define FPS 30.0f
 #define REND_UPD_TIME 1000.0f/FPS
-#define PH_UPD_TIME 1
+#define PH_UPD_TIME 1000.0f/FPS
 
 
 
@@ -60,7 +60,7 @@ int s = -1;
 
 SceneObject* defaultScene()
 {
-	return new ScenaTestTekstur();
+	return new Scena();
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -372,10 +372,10 @@ LRESULT CALLBACK WndProc(HWND    hWnd,
 		AppGui::instance().d();
 		AppGui::instance().g();
 		// [TIMER] Timer dla klatek
-		//SetTimer(hWnd, 100, REND_UPD_TIME, (TIMERPROC)NULL);
+		SetTimer(hWnd, 100, REND_UPD_TIME, (TIMERPROC)NULL);
 
 		// [TIMER] Timer dla silnika fizyki
-		//SetTimer(hWnd, 101, PH_UPD_TIME, (TIMERPROC)NULL);
+		SetTimer(hWnd, 101, PH_UPD_TIME, (TIMERPROC)NULL);
 		break;
 
 		// Window is being destroyed, cleanup

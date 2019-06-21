@@ -5,7 +5,7 @@
 class KulaG : public SceneObject
 {
 private:
-	int _stacks, _sectors;
+	float _stacks, _sectors;
 	GLfloat _R;
 	Vector3 fKula2(GLfloat sec, GLfloat sta, GLfloat r);
 public:

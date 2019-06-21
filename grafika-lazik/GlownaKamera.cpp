@@ -9,9 +9,19 @@
 
 GlownaKamera::GlownaKamera(Vector3 position, Vector3 rotation) : SceneObject("kamera", position, rotation)
 {
-	join(new SzescianG("podstawa", 9, 0.3, 5.2, { 0, 0, 0 }, { 0, 0, 0 }, 9, 1, 4, { 0.94, 0.23, 0.70 }));
-	join(new SzescianG("bryla1", 7, 4, 5, { 0, 2.15, 0 }, { 0, 0, 0 }, 7, 4, 5, { 0.19, .63, .92 }));
-	join(new PierscienG("ramka-obiektywu", 0.7, 0.2, 0.1, 9, { -1.5, 2.7, -2.6 }));
+	join(new SzescianG("podstawa", 9, 0.3, 5.2, { 0, 0, 0 }, { 0, 0, 0 }, 9, 1, 4, { .289,.289,.289 }));
+	auto br1 = new SzescianG("bryla1", 7, 4, 5, { 0, 2.15, 0 }, { 0, 0, 0 }, 7, 4, 5, { 0.19, .63, .92 });
+	
+	br1->addTexture(nullptr);
+	
+	br1->addTexture(new Texture2D("kia2.bmp"));
+	br1->addTexture(new Texture2D("kia.bmp"));
+	
+	br1->addTexture(nullptr);
+	br1->addTexture(nullptr);
+	br1->addTexture(nullptr);
+	join(br1);
+	join(new PierscienG("ramka-obiektywu", 0.7, 0.2, 0.1, 18, { -1.15, 2.7, -2.6 }));
 	join(new SceneObject("brylaboczna-l", { 4, 0.15, 0 }, { 0, 0, 0 }, {
 		new TrapezRownoramiennyG("s1", 2, 1, 0.5, false, false, 1, {-.25, 1, 2.5}, {90, 0, 0}),
 		new TrapezRownoramiennyG("s2", 2, 1, 0.5, false, false, 1, {-.25, 1, -2.5}, {90, 0, 0}),

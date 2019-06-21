@@ -10,7 +10,7 @@ private:
 	GLfloat _r, _wys;
 public:
 	WalecG(GLfloat wys, GLfloat rad,
-		Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, int sections = 20) : SceneObject(position, rotation), _sections(sections), _wys(wys), _r(rad) {};
+		Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, int sections = 20, Vector3 color = {0,0,0}) : SceneObject(position, rotation, color), _sections(sections), _wys(wys), _r(rad) {};
 	WalecG(std::string name, GLfloat wys, GLfloat rad,
 		Vector3 position = { 0,0,0 }, Vector3 rotation = { 0,0,0 }, int sections = 20) : SceneObject(name, position, rotation), _sections(sections), _wys(wys), _r(rad) {};
 	void color(Vector3 color);

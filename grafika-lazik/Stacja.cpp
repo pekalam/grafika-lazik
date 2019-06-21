@@ -18,9 +18,11 @@ Stacja::Stacja(Vector3 position, Vector3 rotation, Vector3 color) : SceneObject(
 	podstawa->color({ 0.3984,0.3984,0.3984 });
 
 	
-	auto kula = new KulaG(76, 20, 20, { pos.x, 36, pos.z }, {}, { 0,0,1 });
-	join(podstawa);
+	auto kula = new KulaG(76, 20, 20, { pos.x, 36, pos.z }, {}, { 0,0,0 });
+	kula->addTexture(new Texture2D("glass.bmp"));
 	join(kula);
+	join(podstawa);
+	
 
 	auto bok1 = new SceneObject("bok1", {75}, {}, {
 		new TrapezRownoramiennyG(20, 20, 10, true, false, 5, {0, 38, 5}, {90, 0, 180}),

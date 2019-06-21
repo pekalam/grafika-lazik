@@ -46,7 +46,7 @@ unsigned char* LoadImage(std::string file, BITMAPINFOHEADER &img)
 	return ilGetData();
 }
 
-GLuint TextureLoader::loadTexture2D(std::string file)
+GLuint TextureLoader::loadTexture2D(std::string file, bool repeat)
 {
 	BITMAPINFOHEADER bitmapinfoheader;
 	//unsigned char* bitmap = loadBitmapFile(file.c_str(), &bitmapinfoheader);
@@ -62,8 +62,9 @@ GLuint TextureLoader::loadTexture2D(std::string file)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	auto param = repeat ? GL_REPEAT : GL_CLAMP;
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, param);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, param);
 
 	// tworzy obraz tekstury
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bitmapinfoheader.biWidth,

@@ -25,8 +25,9 @@ private:
 	std::string warn;
 	std::string err;
 	tinyobj::attrib_t attrib;
-	std::vector<tinyobj::shape_t> shapes;
+	std::vector<tinyobj::shape_t> shapes1;
 	std::vector<tinyobj::material_t> materials;
+	tinyobj::shape_t* shapes;
 protected:
 	void drawObject();
 

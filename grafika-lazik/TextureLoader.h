@@ -9,7 +9,7 @@ class TextureLoader
 {
 public:
 	static TextureLoader& getInstance() { return _textureLoader; }
-	GLuint loadTexture2D(std::string file);
+	GLuint loadTexture2D(std::string file, bool = false);
 private:
 	TextureLoader();
 	~TextureLoader();

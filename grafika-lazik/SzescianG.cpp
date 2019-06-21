@@ -9,6 +9,8 @@ void SzescianG::drawObject()
 	GLfloat stepY = _wys / _sectorsY;
 	GLfloat stepZ = _szer / _sectorsZ;
 
+	nextTex();
+
 	for (i = 1; i <= _sectorsX; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (j = 1; j <= _sectorsY + 1; j++) {
@@ -18,7 +20,7 @@ void SzescianG::drawObject()
 
 			float tx = (x + _dl/2) / _dl;
 			float ty = (y + _wys / 2) / _wys;
-			TEXTURE2D(tx, ty);
+			TEXTURE2D(1-tx, ty);
 			glVertex3f(x, y, _szer/2);
 			glNormal3f(0, 0, 1);
 
@@ -26,11 +28,13 @@ void SzescianG::drawObject()
 			y = -_wys / 2 + (j - 1) * stepY;
 			tx = (x + _dl / 2) / _dl;
 			ty = (y + _wys / 2) / _wys;
-			TEXTURE2D(tx, ty);
+			TEXTURE2D(1-tx, ty);
 			glVertex3f(x, y, _szer / 2);
 		}
 		glEnd();
 	}
+
+	nextTex();
 
 	for (i = 1; i <= _sectorsX; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
@@ -40,7 +44,7 @@ void SzescianG::drawObject()
 			float y = -_wys / 2 + (j - 1) * stepY;
 			float tx = (x + _dl / 2) / _dl;
 			float ty = (y + _wys / 2) / _wys;
-			TEXTURE2D(tx, ty);
+			TEXTURE2D(1-tx, ty);
 			glVertex3f(x, y, -_szer/2);
 			glNormal3f(0, 0, -1);
 
@@ -48,11 +52,13 @@ void SzescianG::drawObject()
 			y = -_wys / 2 + (j - 1) * stepY;
 			tx = (x + _dl / 2) / _dl;
 			ty = (y + _wys / 2) / _wys;
-			TEXTURE2D(tx, ty);
+			TEXTURE2D(1-tx, ty);
 			glVertex3f(x, y, -_szer/2);
 		}
 		glEnd();
 	}
+
+	nextTex();
 
 	for (i = 1; i <= _sectorsZ; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
@@ -77,6 +83,8 @@ void SzescianG::drawObject()
 		glEnd();
 	}
 
+	nextTex();
+
 	for (i = 1; i <= _sectorsZ; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (j = 1; j <= _sectorsY + 1; j++) {
@@ -99,6 +107,8 @@ void SzescianG::drawObject()
 		}
 		glEnd();
 	}
+
+	nextTex();
 
 	for (i = 1; i <= _sectorsZ; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
@@ -123,6 +133,8 @@ void SzescianG::drawObject()
 		glEnd();
 	}
 
+	nextTex();
+
 	for (i = 1; i <= _sectorsZ; i++) {
 		glBegin(GL_TRIANGLE_STRIP);
 		for (j = 1; j <= _sectorsX + 1; j++) {
@@ -144,18 +156,4 @@ void SzescianG::drawObject()
 		}
 		glEnd();
 	}
-}
-
-void SzescianG::glBegin(GLenum mode)
-{
-	if (texture2D != nullptr)
-		texture2D->begin();
-	::glBegin(mode);
-}
-
-void SzescianG::glEnd()
-{
-	if (texture2D != nullptr)
-		texture2D->end();
-	::glEnd();
 }

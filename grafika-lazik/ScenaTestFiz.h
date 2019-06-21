@@ -19,13 +19,13 @@ inline ScenaTestFiz::ScenaTestFiz() : SceneObject("scenafiz")
 	auto kula2 = new KulaG("l2",10, 40, 40, { -25, 11, 0 }, {}, {});
 	kula2->setHasPhysics(true);
 	kula2->setBoundingBox(20, 20, 20);
-	kula2->getPhysics().setConstantAcceleration({ 0.5,0,0 });
+	//kula2->getPhysics().setConstantAcceleration({ 0.5,0,0 });
 	join(kula2);
 
-	auto kula3 = new KulaG("l3", 10, 40, 40, { 45, 11, 0 }, {}, {});
+	auto kula3 = new KulaG("l3", 10, 40, 40, { 20, 11, 0 }, {}, {});
 	kula3->setHasPhysics(true);
 	kula3->setBoundingBox(20, 20, 20);
-	kula3->getPhysics().setConstantAcceleration({ -0.5,0,0 });
+	//kula3->getPhysics().setConstantAcceleration({ -0.5,0,0 });
 	join(kula3);
 
 	auto ziemia = new ScianaG(500, 500, 25, 25, {}, {}, {1,1,1});

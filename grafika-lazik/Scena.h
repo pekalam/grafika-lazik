@@ -6,6 +6,7 @@
 #include "Kamien.h"
 #include "Stacja.h"
 #include "SzescianG.h"
+#include "PierscienG.h"
 
 
 class Scena :
@@ -21,20 +22,22 @@ public:
 
 inline Scena::Scena(Vector3 position, Vector3 rotation, Vector3 color) : SceneObject("scena", position, rotation, {}, color)
 {
-	join(new Powierzchnia({ 0,0 }));
+	auto pow = new Powierzchnia({ 0,0 });
+	pow->addTexture(new Texture2D("piach.bmp", true));
+	join(pow);
 	join(new Lazik({ 0, 2, 0 }));
 	
 	std::random_device rd;
 	std::mt19937 e2(rd());
 	float rg = 100;
-	std::uniform_real_distribution<> distX(-45, 55);
-	std::uniform_real_distribution<> distY(-50, 30);
+	std::uniform_real_distribution<> distX(-100, 100);
+	std::uniform_real_distribution<> distY(-100, 100);
 	std::uniform_real_distribution<> distR(1, 3);
 	std::uniform_int_distribution<> distPatt(0, 99);
 	Kamien* patt[200];
 	for (int i = 0; i < 200; i++)
 	{
-		patt[i] = new Kamien(distR(e2), { (float)distX(e2), 0, -(float)distY(e2) });
+		patt[i] = new Kamien(distR(e2), { (float)distX(e2), 2, -(float)distY(e2) });
 		join(patt[i]);
 	}
 	/*
@@ -45,12 +48,11 @@ inline Scena::Scena(Vector3 position, Vector3 rotation, Vector3 color) : SceneOb
 		rock->positionZ(-(float)distY(e2));
 		join(rock);
 	}
-	std::uniform_real_distribution<> distY2(30, 40);
 	for (int i = 0; i < 500; i++) {
 		auto r = distPatt(e2);
 		auto rock = new Kamien(*patt[r]);
 		rock->positionX((float)distX(e2));
-		rock->positionZ(-(float)distY2(e2));
+		rock->positionZ(-(float)distY(e2));
 		rock->positionY(1);
 		join(rock);
 	}*/
